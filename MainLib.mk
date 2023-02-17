@@ -5,9 +5,12 @@
 
 # This file is only a template and should be included 
 # in other Makefile
-ifeq ($(PLATFORM), Pc32)
-target := $(target)Pc32
-endif
+
+#include custom functions
+include $(make_dir)/Functions.mk
+
+target := $(call set-target-name,$(target))
+$(call check-platform)
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
@@ -68,9 +71,9 @@ clean:
 distclean:
 	@echo Restoring project folder to default state
 	@$(RMDIR) $(build_root_dir)
-	@$(RMDIR) $(bin_dir)
-	@$(RMDIR) $(lib_dir)
-	@$(RMDIR) $(test_dir)
+	@$(RMDIR) $(bin_root_dir)
+	@$(RMDIR) $(lib_root_dir)
+	@$(RMDIR) $(test_root_dir)
 	+@for dir in $(external_dirs); do \
 		$(MAKE) --directory=$$dir distclean; \
 	done

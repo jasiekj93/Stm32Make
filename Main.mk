@@ -9,6 +9,10 @@
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
 
+#include custom functions
+include $(make_dir)/Functions.mk
+$(call check-platform)
+
 # Measuring time feature
 # start_time variable is expanded immiediate at the beggining of make process,
 # the others are expanded (and executed) during every usage 

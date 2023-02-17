@@ -7,7 +7,7 @@
 # in other Makefile
 
 project_dir ?= ../..
-PLATFORM := ARM
+PLATFORM ?= ArmM7
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk

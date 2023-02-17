@@ -19,16 +19,24 @@ optimalization = -O0
 endif
 
 ### GCC flags ###
-CFLAGS = $(MCU) $(cxx_defs) $(cxx_includes) $(optimalization)
+CFLAGS = $(mcu) $(cxx_defs) $(cxx_includes) $(optimalization)
 
 ifneq ($(PLATFORM), Pc32)
 CFLAGS += -fdata-sections -ffunction-sections 
 CXXFLAGS += -ffreestanding -fno-exceptions -fno-rtti 
 endif
+ifeq ($(PLATFORM), ArmA9)
+CFLAGS += -DNOT_USE_STD
+CFLAGS += -Wno-int-to-pointer-cast -fno-operator-names -Wno-write-strings
+endif
 
 # Add debug flags
 ifeq ($(generate_debug_info), 1)
+ifeq ($(PLATFORM), ArmA9)
+CFLAGS += -g -gstrict-dwarf
+else
 CFLAGS += -g -gdwarf-2
+endif
 endif
 
 # Generate dependency information as 'make' rules
@@ -43,12 +51,12 @@ endif
 CXXFLAGS += $(CFLAGS) -std=c++17 
 
 #Assembler flags
-ASFLAGS += $(MCU) $(asm_defs) $(asm_includes) $(optimalization) -Wall -fdata-sections -ffunction-sections -ffreestanding -fno-exceptions
+ASFLAGS += $(mcu) $(asm_defs) $(asm_includes) $(optimalization) -Wall -fdata-sections -ffunction-sections -ffreestanding -fno-exceptions
 
 #Linker flags and directories
 #Libraries are stored in variable LDLIBS
-LDFLAGS += $(MCU) -L$(lib_dir) -Wl,-Map=$(build_dir)/$(target).map,--cref -Wl,--gc-sections
+LDFLAGS += $(mcu) -L$(lib_dir) -Wl,-Map=$(build_dir)/$(target).map,--cref -Wl,--gc-sections
 
-ifeq ($(PLATFORM), ARM)
+ifneq ($(PLATFORM), Pc32)
 LDFLAGS += -specs=nano.specs -specs=nosys.specs
 endif

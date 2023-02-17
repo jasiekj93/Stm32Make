@@ -3,6 +3,9 @@
 # @date 06-03-2022
 # ------------------------------------------------
 
+# platform
+export PLATFORM := ArmM7
+
 # target
 target = 
 

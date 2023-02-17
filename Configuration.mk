@@ -5,7 +5,7 @@
 
 # This file is only a template and should be included 
 # in other Makefile
-PLATFORM ?= ARM
+PLATFORM ?= ArmM7
 build_type ?= debug
 
 # directories
@@ -22,29 +22,36 @@ external_lib_dir = $(project_dir)/external
 
 # Toolchain
 ifeq ($(PLATFORM), Pc32)
-PREFIX := 
+prefix := 
 else
-PREFIX := arm-none-eabi-
+prefix := arm-none-eabi-
 endif
 
-CXX := $(PREFIX)g++
-CC := $(PREFIX)gcc
-AS := $(PREFIX)gcc -x assembler-with-cpp
-CP := $(PREFIX)objcopy
-SZ := $(PREFIX)size
-AR := $(PREFIX)ar
+CXX := $(prefix)g++
+CC := $(prefix)gcc
+AS := $(prefix)gcc -x assembler-with-cpp
+CP := $(prefix)objcopy
+SZ := $(prefix)size
+AR := $(prefix)ar
 HEX := $(CP) -O ihex
 BIN := $(CP) -O binary -S
 
-# MCU definition
+# mcu definition
 ifeq ($(PLATFORM), Pc32)
-MCU := -m32
+mcu := -m32
+else ifeq ($(PLATFORM), ArmA9)
+mcu := -mcpu=cortex-a9 
+else ifeq ($(PLATFORM), ArmM7)
+cpu := -mcpu=cortex-m7
+fpu := -mfpu=fpv5-sp-d16
+float-abi := -mfloat-abi=hard
+mcu := $(cpu) -mthumb $(fpu) $(float-abi)
 else
-CPU := -mcpu=cortex-m7
-FPU := -mfpu=fpv5-sp-d16
-FLOAT-ABI := -mfloat-abi=hard
-MCU := $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
-endif 
+cpu := -mcpu=cortex-m4
+fpu := -mfpu=fpv4-sp-d16
+float-abi := -mfloat-abi=hard
+mcu := $(cpu) -mthumb $(fpu) $(float-abi)
+endif
 
 # Utilities
 RMDIR ?= rm -rf

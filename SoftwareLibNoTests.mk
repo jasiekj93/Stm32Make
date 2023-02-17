@@ -8,9 +8,10 @@
 
 project_dir ?= ..
 
-ifeq ($(PLATFORM), Pc32)
-target := $(target)Pc32
-endif
+#include custom functions
+include $(make_dir)/Functions.mk
+
+target := $(call set-target-name,$(target))
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
