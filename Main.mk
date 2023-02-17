@@ -56,7 +56,7 @@ include $(make_dir)/Flags.mk
 LDFLAGS += -T$(ldscript)
 
 # targets
-.PHONY: debug release $(external_dirs) $(library_dirs) $(binaries) clean distclean rebuild
+.PHONY: debug release $(external_dirs) $(library_dirs) $(binaries) rebuild clean mrproper distclean
 
 debug: $(external_dirs) $(library_dirs) $(binaries)
 	@echo "Building time: [$(build_time) seconds]"
@@ -79,20 +79,23 @@ include $(make_dir)/BuildRules.mk
 
 # rebuild
 rebuild:
-	@$(RMDIR) $(bin_dir)
+	-@$(RMDIR) $(bin_dir)
 	+@$(MAKE) -C .
  
 # clean up
 clean:
-	@echo Cleaning
-	@$(RMDIR) $(build_root_dir)
+	@echo Cleaning build directory
+	-@$(RMDIR) $(build_root_dir)
 
-distclean:
-	@echo Restoring project folder to default state
-	@$(RMDIR) $(build_root_dir)
-	@$(RMDIR) $(bin_root_dir)
-	@$(RMDIR) $(lib_root_dir)
-	@$(RMDIR) $(test_root_dir)
-	+@for dir in $(external_dirs); do \
-		$(MAKE) --directory=$$dir distclean; \
+mrproper: clean
+	@echo Cleaning bin, lib and test directories
+	-@$(RMDIR) $(build_root_dir)
+	-@$(RMDIR) $(bin_root_dir)
+	-@$(RMDIR) $(lib_root_dir)
+	-@$(RMDIR) $(test_root_dir)
+
+distclean: mrproper
+	@echo Cleaning all external projects
+	-+@for dir in $(external_dirs); do \
+		$(MAKE) --directory=$$dir clean distclean; \
 	done

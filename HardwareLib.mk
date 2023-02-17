@@ -31,5 +31,5 @@ include $(make_dir)/BuildRules.mk
 # clean up
 clean:
 	@echo Cleaning
-	@$(RMDIR) $(build_dir)
+	-@$(RMDIR) $(build_dir)
 
