@@ -16,8 +16,8 @@ float-abi := -mfloat-abi=hard
 mcu := $(cpu) -mthumb $(fpu) $(float-abi)
 
 # Compiler flags
-platform_c_flags = -fdata-sections -ffunction-sections 
-platform_cxx_flags = -ffreestanding -fno-exceptions -fno-rtti
+platform_c_flags := -fdata-sections -ffunction-sections 
+platform_cxx_flags := -ffreestanding -fno-exceptions -fno-rtti
 
 # Debug flags
 platform_debug_flags := -g -gdwarf-2

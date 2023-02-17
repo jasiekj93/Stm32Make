@@ -20,40 +20,18 @@ lib_dir = $(project_dir)/lib/$(build_type)
 test_dir = $(project_dir)/test/$(build_type)
 external_lib_dir = $(project_dir)/external
 
+# Include platform specific settings
 include $(make_dir)/platform/$(PLATFORM).mk
 
 # Toolchain
-ifeq ($(PLATFORM), Pc32)
-prefix := 
-else
-prefix := arm-none-eabi-
-endif
-
-CXX := $(prefix)g++
-CC := $(prefix)gcc
-AS := $(prefix)gcc -x assembler-with-cpp
-CP := $(prefix)objcopy
-SZ := $(prefix)size
-AR := $(prefix)ar
+CXX := $(toolchain_prefix)g++
+CC := $(toolchain_prefix)gcc
+AS := $(toolchain_prefix)gcc -x assembler-with-cpp
+CP := $(toolchain_prefix)objcopy
+SZ := $(toolchain_prefix)size
+AR := $(toolchain_prefix)ar
 HEX := $(CP) -O ihex
 BIN := $(CP) -O binary -S
-
-# mcu definition
-ifeq ($(PLATFORM), Pc32)
-mcu := -m32
-else ifeq ($(PLATFORM), ArmA9)
-mcu := -mcpu=cortex-a9 
-else ifeq ($(PLATFORM), ArmM7)
-cpu := -mcpu=cortex-m7
-fpu := -mfpu=fpv5-sp-d16
-float-abi := -mfloat-abi=hard
-mcu := $(cpu) -mthumb $(fpu) $(float-abi)
-else
-cpu := -mcpu=cortex-m4
-fpu := -mfpu=fpv4-sp-d16
-float-abi := -mfloat-abi=hard
-mcu := $(cpu) -mthumb $(fpu) $(float-abi)
-endif
 
 # Utilities
 RMDIR ?= rm -rf

@@ -13,8 +13,13 @@ $(if $(filter $(PLATFORM),Pc32 ArmA9),$\
 	$1)
 endef
 
+
+supported_platforms := $(notdir $\
+	$(basename $\
+		$(wildcard $(make_dir)/platform/*.mk)))
+
 #$(call check-platform)
 define check-platform
-$(if $(filter $(PLATFORM),Pc32 ArmA9 ArmM7 ArmM4),,$\
-	$(error ERROR: Platform $(PLATFORM) is not supported!))
+$(if $(filter $(PLATFORM),$(supported_platforms)),,$\
+	$(error ERROR: Platform $(PLATFORM) is not supported! Try $(supported_platforms).))
 endef
