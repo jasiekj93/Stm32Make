@@ -20,6 +20,8 @@ lib_dir = $(project_dir)/lib/$(build_type)
 test_dir = $(project_dir)/test/$(build_type)
 external_lib_dir = $(project_dir)/external
 
+include $(make_dir)/platform/$(PLATFORM).mk
+
 # Toolchain
 ifeq ($(PLATFORM), Pc32)
 prefix := 
