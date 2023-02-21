@@ -13,10 +13,9 @@ toolchain_prefix := arm-none-eabi-
 mcu := -mcpu=cortex-a9 
 
 # Compiler flags
-platform_c_flags := -fdata-sections -ffunction-sections 
-platform_c_flags += -DNOT_USE_STD
-platform_c_flags += -Wno-int-to-pointer-cast -Wno-write-strings 
-platform_cxx_flags := -ffreestanding -fno-exceptions -fno-rtti
+platform_c_flags := -DNOT_USE_STD
+platform_c_flags += -Wno-int-to-pointer-cast -Wno-write-strings -fno-operator-names
+platform_cxx_flags := 
 
 # Debug flags
 platform_debug_flags := -g -gstrict-dwarf 
