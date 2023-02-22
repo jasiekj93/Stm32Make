@@ -16,6 +16,8 @@ cxx_sources :=  \
 
 # Includes
 cxx_includes := \
+-I. \
+-I.. \
 
 # Defines
 cxx_defs := \

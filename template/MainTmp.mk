@@ -28,6 +28,7 @@ cxx_sources =  \
 
 # Includes
 cxx_includes =  \
+-I. \
 
 # Linker script
 export ldscript = 
