@@ -17,13 +17,13 @@ cxx_sources :=  \
 # Includes
 cxx_includes := \
 -I. \
--I.. \
 
 # Defines
 cxx_defs := \
 
 # Libraries
 library_includes = \
+-I.. \
 
 library_flags = \
 
