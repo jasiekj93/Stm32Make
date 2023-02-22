@@ -9,6 +9,9 @@
 # Toolchain
 toolchain_prefix := 
 
+# Name postfix
+platform_name_postfix := Pc32
+
 # Mcu definition
 mcu := -m32
 
@@ -21,3 +24,6 @@ platform_debug_flags := -g -gdwarf-2
 
 # Linker flags
 platform_linker_flags := 
+
+# Libraries
+platform_libraries := 

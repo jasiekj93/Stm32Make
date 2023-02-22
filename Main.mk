@@ -27,7 +27,7 @@ library_dirs := $(addprefix lib$(target)-, $(library_names))
 external_dirs := $(addprefix $(external_lib_dir)/, $(external_names))
 
 library_includes := $(addprefix -I, $(library_dirs))
-library_flags := $(addprefix -l$(target)-,$(notdir $(library_names)))
+library_flags := $(addsuffix $(platform_name_postfix),$(addprefix -l$(target)-,$(notdir $(library_names))))
 
 external_library_includes := $(addprefix -I$(external_lib_dir)/, $(external_names))
 external_library_flags := $(addprefix -l, $(external_lib_names))
@@ -42,7 +42,7 @@ $(library_includes) \
 $(external_library_includes) \
 
 # Libraries
-LDLIBS := -lc -lm -lnosys 
+LDLIBS := $(platform_libraries)
 LDLIBS += $(library_flags) $(external_library_flags) 
 LDLIBS += $(library_flags) $(external_library_flags) 
 
@@ -52,8 +52,10 @@ LDFLAGS	+= $(external_search_path)
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
 
-# Linker script to linker flags
+# Linker script to linker flags if exist
+ifneq ($(ldscript),)
 LDFLAGS += -T$(ldscript)
+endif
 
 # targets
 .PHONY: debug release $(external_dirs) $(library_dirs) $(binaries) rebuild clean mrproper distclean

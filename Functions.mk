@@ -6,14 +6,6 @@
 # This file is only a template and should be included 
 # in other Makefile
 
-#target := $(call set-target-name,$(target))
-define set-target-name
-$(if $(filter $(PLATFORM),Pc32 ArmA9),$\
-	$1$(PLATFORM),$\
-	$1)
-endef
-
-
 supported_platforms := $(notdir $\
 	$(basename $\
 		$(wildcard $(make_dir)/platform/*.mk)))

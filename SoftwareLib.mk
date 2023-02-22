@@ -11,10 +11,11 @@ project_dir ?= ..
 #include custom functions
 include $(make_dir)/Functions.mk
 
-target := $(call set-target-name,$(target))
-
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
+
+target := $(target)$(platform_name_postfix)
+
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
 

@@ -9,6 +9,9 @@
 # Toolchain
 toolchain_prefix := arm-none-eabi-
 
+# Name postfix
+platform_name_postfix := 
+
 # Mcu definition
 cpu := -mcpu=cortex-m4
 fpu := -mfpu=fpv4-sp-d16
@@ -24,3 +27,6 @@ platform_debug_flags := -g -gdwarf-2
 
 # Linker flags
 platform_linker_flags := -specs=nano.specs -specs=nosys.specs
+
+# Libraries
+platform_libraries := -lc -lm -lnosys 

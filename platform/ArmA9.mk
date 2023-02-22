@@ -9,6 +9,9 @@
 # Toolchain
 toolchain_prefix := arm-none-eabi-
 
+# Name postfix
+platform_name_postfix := ArmA9
+
 # Mcu definition
 mcu := -mcpu=cortex-a9 
 
@@ -22,3 +25,6 @@ platform_debug_flags := -g -gstrict-dwarf
 
 # Linker flags
 platform_linker_flags := -specs=nano.specs -specs=nosys.specs
+
+# Libraries
+platform_libraries := -lc -lm -lnosys 

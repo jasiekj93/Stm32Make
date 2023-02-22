@@ -9,11 +9,10 @@
 #include custom functions
 include $(make_dir)/Functions.mk
 
-target := $(call set-target-name,$(target))
-$(call check-platform)
-
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
+
+target := $(target)$(platform_name_postfix)
 
 # Measuring time feature
 # start_time variable is expanded immiediate at the beggining of make process,
