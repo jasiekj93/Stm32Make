@@ -12,6 +12,7 @@ include $(make_dir)/Configuration.mk
 #include custom functions
 include $(make_dir)/Functions.mk
 $(call check-platform)
+$(call check-target)
 
 # Measuring time feature
 # start_time variable is expanded immiediate at the beggining of make process,

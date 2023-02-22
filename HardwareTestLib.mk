@@ -9,6 +9,10 @@
 project_dir ?= ../..
 PLATFORM ?= ArmM7
 
+#include custom functions
+include $(make_dir)/Functions.mk
+$(call check-target)
+
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
 

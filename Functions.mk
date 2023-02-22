@@ -15,3 +15,9 @@ define check-platform
 $(if $(filter $(PLATFORM),$(supported_platforms)),,$\
 	$(error ERROR: Platform $(PLATFORM) is not supported! Try $(supported_platforms).))
 endef
+
+#$(call check-target)
+define check-target
+$(if $(target),,$\
+	$(error ERROR: Variable 'target' is empty!))
+endef
