@@ -25,6 +25,7 @@ build_time = $(shell expr $(end_time) - $(start_time) )
 project_dir := .
 
 library_dirs := $(addprefix lib$(target)-, $(library_names))
+program_dirs := $(program_names)
 external_dirs := $(addprefix $(external_lib_dir)/, $(external_names))
 
 library_includes := $(addprefix -I, $(library_dirs))
@@ -59,19 +60,19 @@ LDFLAGS += -T$(ldscript)
 endif
 
 # targets
-.PHONY: debug release $(external_dirs) $(library_dirs) $(binaries) rebuild clean mrproper distclean
+.PHONY: debug release $(external_dirs) $(library_dirs) $(binaries) $(program_dirs) rebuild clean mrproper distclean
 
-debug: $(external_dirs) $(library_dirs) $(binaries)
+debug: $(external_dirs) $(library_dirs) $(binaries) $(program_dirs)
 	@echo "Building time: [$(build_time) seconds]"
 
 release:
 	+@$(MAKE) --directory=$(project_dir) build_type=release
 
-$(binaries): $(external_dirs) $(library_dirs)
+$(binaries): $(external_dirs) $(library_dirs) $(program_dirs)
 
 $(library_dirs): $(external_dirs)
 
-$(library_dirs) $(external_dirs):
+$(library_dirs) $(external_dirs) $(program_dirs):
 	@echo Making libraries:
 	+@$(MAKE) --directory=$@
 

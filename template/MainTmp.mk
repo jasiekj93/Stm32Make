@@ -23,6 +23,9 @@ external_lib_dirs = \
 # Project libraries
 library_names = \
 
+# Project subprograms
+program_names = \
+
 # Sources 
 cxx_sources =  \
 
