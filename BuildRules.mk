@@ -61,11 +61,11 @@ $(bin_dir)/$(target).elf: $(objects) Makefile | $(bin_dir)
 	@$(SZ) $@
 
 # build main executable: hex
-$(bin_dir)/%.hex: $(bin_dir)/%.elf | $(bin_dir)
+$(bin_dir)/$(target).hex: $(bin_dir)/$(target).elf | $(bin_dir)
 	@$(HEX) $< $@
 	
 # build main executable: bin
-$(bin_dir)/%.bin: $(bin_dir)/%.elf | $(bin_dir)
+$(bin_dir)/$(target).bin: $(bin_dir)/$(target).elf | $(bin_dir)
 	@$(BIN) $< $@		
 
 # create directories
