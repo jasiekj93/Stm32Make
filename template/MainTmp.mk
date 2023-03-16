@@ -23,11 +23,15 @@ external_lib_dirs = \
 # Project libraries
 library_names = \
 
+# Project subprograms
+program_names = \
+
 # Sources 
 cxx_sources =  \
 
 # Includes
 cxx_includes =  \
+-I. \
 
 # Linker script
 export ldscript = 

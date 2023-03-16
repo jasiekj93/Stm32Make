@@ -25,6 +25,7 @@ cxx_sources :=  \
 
 # Includes
 cxx_includes :=  \
+-I. \
 
 # Append rest of Makefile from template
 include $(make_dir)/MainLib.mk
