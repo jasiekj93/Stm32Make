@@ -28,3 +28,6 @@ platform_linker_flags := -specs=nano.specs -specs=nosys.specs
 
 # Libraries
 platform_libraries := -lc -lm -lnosys 
+
+# Binary extensions
+platform_binary_extensions := elf hex bin
