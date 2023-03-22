@@ -29,6 +29,8 @@ LDLIBS := \
 $(library_flags) \
 $(external_library_flags) \
 
+LDLIBS += $(LDLIBS)
+
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
 

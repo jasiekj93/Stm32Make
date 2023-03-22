@@ -27,3 +27,6 @@ platform_linker_flags :=
 
 # Libraries
 platform_libraries := 
+
+# Binary extensions
+platform_binary_extensions := elf
