@@ -9,7 +9,7 @@
 # Release
 generate_lst_files = 0
 generate_debug_info = 0
-optimalization = -Os
+optimalization = -O0
 
 # Debug
 ifeq ($(build_type), debug)

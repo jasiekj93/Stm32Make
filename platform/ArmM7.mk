@@ -26,7 +26,7 @@ platform_cxx_flags := -ffreestanding -fno-exceptions -fno-rtti
 platform_debug_flags := -g -gdwarf-2
 
 # Linker flags
-platform_linker_flags := -specs=nano.specs -specs=nosys.specs
+platform_linker_flags := -specs=nano.specs -specs=nosys.specs -Wl,--print-memory-usage
 
 # Libraries
 platform_libraries := -lc -lm -lnosys 
