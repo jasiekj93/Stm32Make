@@ -16,6 +16,7 @@ $(call check-project_name)
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
 
+# target
 target := lib$(project_name)-$(library_name)$(platform_name_postfix)
 
 # Append GCC flags variables from file here
@@ -28,10 +29,15 @@ all: library pcLibrary tests
 
 library: $(lib_dir)/$(target).a
 
+$(lib_dir)/$(target).a: $(required_libraries)
+
+$(required_libraries): 
+	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@
+
 pcLibrary: 
 	+@$(MAKE) -C . library PLATFORM=Pc32 
 
-tests:
+tests: pcLibrary
 	+@$(MAKE) -C tests PLATFORM=Pc32
 
 print-%  : ; @echo "$* = $($*)"

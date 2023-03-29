@@ -12,6 +12,7 @@ include $(make_dir)/Configuration.mk
 #include custom functions
 include $(make_dir)/Functions.mk
 $(call check-platform)
+$(call check-project_name)
 $(call check-target)
 
 # Measuring time feature
@@ -24,7 +25,7 @@ build_time = $(shell expr $(end_time) - $(start_time) )
 
 project_dir := .
 
-library_dirs := $(addprefix lib$(target)-, $(library_names))
+library_dirs := $(addprefix lib$(project_name)-, $(library_names))
 program_dirs := $(program_names)
 external_dirs := $(addprefix $(external_lib_dir)/, $(external_names))
 

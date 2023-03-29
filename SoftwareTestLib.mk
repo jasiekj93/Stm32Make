@@ -25,9 +25,9 @@ LDFLAGS := \
 -L$(external_lib_dir)/CppUTest/lib/Pc32 \
 $(external_library_paths)
 
+required_libraries := $(tested_library_name) $(required_libraries)
 # Includes
-library_includes = $(addprefix -I$(project_dir)/lib$(project_name)-,$(tested_library_name))
-library_includes += $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+library_includes = $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
 
 cxx_includes += \
 $(library_includes) \
@@ -35,8 +35,7 @@ $(external_library_includes) \
 -I$(external_lib_dir)/CppUTest/include \
 
 # libraries
-library_flags = $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(tested_library_name)))
-library_flags += $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(required_libraries)))
+library_flags = $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(required_libraries)))
 
 LDLIBS := \
 -lCppUTest \
@@ -51,6 +50,11 @@ include $(make_dir)/Flags.mk
 
 all: $(test_dir)/$(target).elf
 	@$(test_dir)/$(target).elf
+
+$(test_dir)/$(target).elf : $(required_libraries)
+
+$(required_libraries):
+	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@
 
 print-%  : ; @echo "$* = $($*)"
 
