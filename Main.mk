@@ -72,6 +72,8 @@ $(binaries): $(external_dirs) $(library_dirs) $(program_dirs)
 
 $(library_dirs): $(external_dirs)
 
+$(program_dirs): $(library_dirs)
+
 $(library_dirs) $(external_dirs) $(program_dirs):
 	@echo Making libraries:
 	+@$(MAKE) --directory=$@

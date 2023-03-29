@@ -12,6 +12,7 @@ PLATFORM := Pc32
 #include custom functions
 include $(make_dir)/Functions.mk
 $(call check-target)
+$(call check-project_name)
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
@@ -21,10 +22,15 @@ LDFLAGS := \
 $(external_library_paths)
 
 # Includes
+library_includes = $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+
 cxx_includes += \
 $(library_includes) \
+$(external_library_includes) \
 
 # libraries
+library_flags = $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(required_libraries)))
+
 LDLIBS := \
 $(library_flags) \
 $(external_library_flags) \
@@ -38,6 +44,11 @@ include $(make_dir)/Flags.mk
 .PHONY: all clean
 
 all: $(bin_dir)/$(target).elf
+
+$(bin_dir)/$(target).elf: $(required_libraries)
+
+$(required_libraries):
+	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@
 
 print-%  : ; @echo "$* = $($*)"
 

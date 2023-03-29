@@ -29,11 +29,6 @@ all: library pcLibrary tests
 
 library: $(lib_dir)/$(target).a
 
-$(lib_dir)/$(target).a: $(required_libraries)
-
-$(required_libraries): 
-	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@
-
 pcLibrary: 
 	+@$(MAKE) -C . library PLATFORM=Pc32 
 
