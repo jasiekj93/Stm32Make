@@ -31,6 +31,7 @@ library_includes += $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_
 
 cxx_includes += \
 $(library_includes) \
+$(external_library_includes) \
 -I$(external_lib_dir)/CppUTest/include \
 
 # libraries

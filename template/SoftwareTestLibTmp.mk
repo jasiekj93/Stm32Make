@@ -21,8 +21,11 @@ cxx_includes := \
 # Defines
 cxx_defs := \
 
-# Libraries
+# internal libraries
 required_libraries = \
+
+# external libraries
+external_library_includes = \
 
 external_library_flags = \
 
