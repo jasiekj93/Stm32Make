@@ -6,6 +6,9 @@
 # platform
 export PLATFORM := ArmM7
 
+# project
+project_name :=
+
 # target
 target = 
 

@@ -11,10 +11,14 @@ PLATFORM := Pc32
 
 #include custom functions
 include $(make_dir)/Functions.mk
-$(call check-target)
+$(call check-tested_library_name)
+$(call check-project_name)
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
+
+# Target
+target := test$(project_name)-$(tested_library_name)$(platform_name_postfix)
 
 # libraries
 LDFLAGS := \
@@ -22,11 +26,17 @@ LDFLAGS := \
 $(external_library_paths)
 
 # Includes
+library_includes = $(addprefix -I$(project_dir)/lib$(project_name)-,$(tested_library_name))
+library_includes += $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+
 cxx_includes += \
 $(library_includes) \
 -I$(external_lib_dir)/CppUTest/include \
 
 # libraries
+library_flags = $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(tested_library_name)))
+library_flags += $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(required_libraries)))
+
 LDLIBS := \
 -lCppUTest \
 $(library_flags) \

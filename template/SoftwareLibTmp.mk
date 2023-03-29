@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 # Target
-target := 
+library_name := 
 
 # Directories
 project_dir ?= ..

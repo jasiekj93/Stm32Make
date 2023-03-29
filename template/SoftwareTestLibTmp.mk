@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 # Target
-target := 
+tested_library_name := 
 
 # Directories
 project_dir ?= ../..
@@ -22,10 +22,7 @@ cxx_includes := \
 cxx_defs := \
 
 # Libraries
-library_includes = \
--I.. \
-
-library_flags = \
+required_libraries = \
 
 external_library_flags = \
 

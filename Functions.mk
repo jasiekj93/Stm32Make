@@ -21,3 +21,21 @@ define check-target
 $(if $(target),,$\
 	$(error ERROR: Variable 'target' is empty!))
 endef
+
+#$(call check-library_name)
+define check-library_name
+$(if $(library_name),,$\
+	$(error ERROR: Variable 'library_name' is empty!))
+endef
+
+#$(call check-project_name)
+define check-project_name
+$(if $(project_name),,$\
+	$(error ERROR: Variable 'project_name' is empty!))
+endef
+
+#$(call check-tested_library_name)
+define check-tested_library_name
+$(if $(tested_library_name),,$\
+	$(error ERROR: Variable 'tested_library_name' is empty!))
+endef
