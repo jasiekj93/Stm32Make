@@ -25,4 +25,4 @@ cxx_defs := \
 required_libraries = \
 
 # Append rest of Makefile from template
-include $(make_dir)/SoftwareLibNoTests.mk
+include $(make_dir)/InternalSoftwareLibNoTests.mk
