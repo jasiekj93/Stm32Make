@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 # Target
-target := 
+library_name := 
 
 # Directories
 project_dir ?= ..
@@ -20,6 +20,9 @@ cxx_includes := \
 
 # Defines
 cxx_defs := \
+
+# internal libraries
+required_libraries = \
 
 # Append rest of Makefile from template
 include $(make_dir)/SoftwareLibNoTests.mk
