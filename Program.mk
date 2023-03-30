@@ -7,7 +7,6 @@
 # in other Makefile
 
 project_dir ?= ..
-PLATFORM := Pc32
 
 #include custom functions
 include $(make_dir)/Functions.mk
@@ -16,6 +15,9 @@ $(call check-project_name)
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
+
+# binaries
+binaries := $(addprefix $(bin_dir)/$(target)., $(platform_binary_extensions))
 
 # libraries
 LDFLAGS := \
@@ -32,20 +34,29 @@ $(external_library_includes) \
 library_flags = $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(required_libraries)))
 
 LDLIBS := \
+$(platform_libraries) \
 $(library_flags) \
 $(external_library_flags) \
 
 LDLIBS += $(LDLIBS)
 
+# Library path
+LDFLAGS	+= $(external_library_paths)
+
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
+
+# Linker script to linker flags if exist
+ifneq ($(ldscript),)
+LDFLAGS += -T$(ldscript)
+endif
 
 # Targets
 .PHONY: all clean
 
-all: $(bin_dir)/$(target).elf
+all: $(binaries)
 
-$(bin_dir)/$(target).elf: $(required_libraries)
+$(binaries): $(required_libraries)
 
 $(required_libraries):
 	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@

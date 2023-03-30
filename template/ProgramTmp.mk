@@ -31,5 +31,8 @@ external_library_flags = \
 
 external_library_paths = \
 
+# Linker script
+export ldscript = 
+
 # Append rest of Makefile from template
 include $(make_dir)/Program.mk
