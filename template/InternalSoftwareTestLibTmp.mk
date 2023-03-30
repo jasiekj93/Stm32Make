@@ -21,15 +21,5 @@ cxx_includes := \
 # Defines
 cxx_defs := \
 
-# internal libraries
-required_libraries = \
-
-# external libraries
-external_library_includes = \
-
-external_library_flags = \
-
-external_library_paths = \
-
 # Append rest of Makefile from template
 include $(make_dir)/InternalSoftwareTestLib.mk

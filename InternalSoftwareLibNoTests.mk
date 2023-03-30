@@ -24,6 +24,7 @@ library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_
 
 cxx_includes += \
 $(library_includes) \
+$(external_library_includes) \
 
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk

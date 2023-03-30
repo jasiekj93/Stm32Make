@@ -22,7 +22,16 @@ cxx_includes := \
 cxx_defs := \
 
 # internal libraries
-required_libraries = \
+export required_libraries = \
+
+# external libraries
+export external_library_includes = \
+
+# 	for testing purpose - use only PC 32-bit version
+export external_library_flags = \
+
+# 	for testing purposes - use only PC 32-bit version
+export external_library_paths = \
 
 # Append rest of Makefile from template
 include $(make_dir)/InternalSoftwareLib.mk

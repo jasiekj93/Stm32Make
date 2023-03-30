@@ -1,7 +1,5 @@
-* MainLib.mk przerobić na external lib po prostu (cel jako target jak w programie + wymagne biblioteki wewnętrzne)
-* Zrobić aby tylko programy (i biblioteki zewnętrzne budowały potrzebne biblioteki)
-* Usunąć platformyowy suffix PC32, make od testów powinny tworzyć u siebie kopię biblioteki przez wywołanie make do góry
 * Suffix osobny dla biblioteki testowej np. Test zamiast Pc32 (dla Pc32 może być kopiowany)
+* Usunąć platformyowy suffix PC32, make od testów powinny tworzyć u siebie kopię biblioteki przez wywołanie make do góry
 * Najpierw budują się externale (bo są niezależne), potem internale (testy internali mogą dobudowywać wymagane), a na końcu biblioteki i programy
 * biblioteki softwarwe exportują includy i required_libs a testy je zaciągająi dodają swoje
 * softwarweLibTest
