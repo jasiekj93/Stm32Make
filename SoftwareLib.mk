@@ -15,6 +15,11 @@ $(call check-target)
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
 
+# includes
+cxx_includes += \
+$(external_library_includes) \
+
+
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
 

@@ -4,3 +4,5 @@
 * Suffix osobny dla biblioteki testowej np. Test zamiast Pc32 (dla Pc32 może być kopiowany)
 * Najpierw budują się externale (bo są niezależne), potem internale (testy internali mogą dobudowywać wymagane), a na końcu biblioteki i programy
 * biblioteki softwarwe exportują includy i required_libs a testy je zaciągająi dodają swoje
+* softwarweLibTest
+* softwareLib w głównym make

@@ -21,5 +21,8 @@ cxx_includes := \
 # Defines
 cxx_defs := \
 
+# external libraries
+external_library_includes = \
+
 # Append rest of Makefile from template
 include $(make_dir)/SoftwareLib.mk
