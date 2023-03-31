@@ -23,13 +23,13 @@ target := test$(project_name)-$(tested_library_name)
 # libraries
 LDFLAGS := \
 -L$(external_lib_dir)/CppUTest/lib/Pc32 \
-$(external_library_paths)
+$(addprefix -L$(external_dir)/,$(external_library_paths))
 
 required_libraries := $(tested_library_name) $(required_libraries)
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
-external_library_includes := $(addprefix ../,$(external_library_includes))
+external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
 
 cxx_includes += \
 $(library_includes) \

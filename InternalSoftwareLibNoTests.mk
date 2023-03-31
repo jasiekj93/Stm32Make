@@ -17,10 +17,11 @@ $(call check-project_name)
 include $(make_dir)/Configuration.mk
 
 # target
-target := lib$(project_name)-$(library_name)
+target := lib$(project_name)-$(library_name)$(test_build_suffix)
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
 
 cxx_includes += \
 $(library_includes) \
@@ -30,11 +31,20 @@ $(external_library_includes) \
 include $(make_dir)/Flags.mk
 
 # Targets
-.PHONY: all library clean
+.PHONY: all library testLibrary clean
 
-all: library 
+all: library testLibrary
 
 library: $(lib_dir)/$(target).a
+
+# only for use by tests in other libraries
+testLibrary: library
+ifeq ($(PLATFORM),Pc32)
+	@echo Creating library $(lib_dir)/$(target).test.a
+	@$(CP) $(lib_dir)/$(target).a $(lib_dir)/$(target).test.a
+else
+	+@$(MAKE) -C . library test_build_suffix=.test PLATFORM=Pc32
+endif
 
 print-%  : ; @echo "$* = $($*)"
 

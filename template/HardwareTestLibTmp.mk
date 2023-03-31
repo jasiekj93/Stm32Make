@@ -21,5 +21,8 @@ cxx_includes := \
 # Defines
 cxx_defs := \
 
+# Linker script
+ldscript = 
+
 # Append rest of Makefile from template
 include $(make_dir)/HardwareTestLib.mk

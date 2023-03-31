@@ -21,6 +21,7 @@ target := lib$(project_name)-$(library_name)$(test_build_suffix)
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
 
 cxx_includes += \
 $(library_includes) \

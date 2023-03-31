@@ -21,12 +21,13 @@ target := test$(project_name)-$(tested_library_name)
 
 # libraries
 LDFLAGS := \
-$(external_library_paths)
+$(addprefix -L$(external_dir)/,$(external_library_paths))
 
 required_libraries := $(tested_library_name) $(required_libraries)
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
 
 cxx_includes += \
 $(library_includes) \
@@ -46,7 +47,7 @@ binaries := $(addprefix $(test_dir)/$(target)., $(platform_binary_extensions))
 include $(make_dir)/Flags.mk
 
 # Linker script to linker flags
-LDFLAGS += -T$(project_dir)/$(ldscript)
+LDFLAGS += -T$(ldscript)
 
 # Targets
 .PHONY: all clean

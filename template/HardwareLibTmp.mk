@@ -29,12 +29,16 @@ cxx_defs := \
 export required_libraries = \
 
 # external libraries
-export external_library_includes = \
+#	e.g. if include flag is '-I$(external_dir)/libFoo'
+#	write 'libFoo'
+export external_library_include_path = \
 
 # 	for testing purposes
 export external_library_flags = \
 
 # 	for testing purposes 
+#	e.g. if link flag is '-L$(external_dir)/libFoo/lib'
+#	write 'libFoo/lib'
 export external_library_paths = \
 
 # Append rest of Makefile from template

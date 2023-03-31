@@ -25,7 +25,9 @@ cxx_defs := \
 required_libraries = \
 
 # external libraries
-external_library_includes = \
+#	e.g. if include flag is '-I$(external_dir)/libFoo'
+#	write 'libFoo'
+external_library_include_path = \
 
 # Append rest of Makefile from template
 include $(make_dir)/InternalSoftwareLibNoTests.mk
