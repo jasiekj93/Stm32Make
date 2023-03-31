@@ -37,7 +37,7 @@ all: library tests
 
 library: $(lib_dir)/$(target).a
 
-tests:
+tests: library
 	+@$(MAKE) -C tests 
 
 print-%  : ; @echo $* = $($*)
