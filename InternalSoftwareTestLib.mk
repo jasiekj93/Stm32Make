@@ -29,6 +29,7 @@ required_libraries := $(tested_library_name) $(required_libraries)
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+external_library_includes := $(addprefix ../,$(external_library_includes))
 
 cxx_includes += \
 $(library_includes) \
@@ -47,15 +48,10 @@ $(external_library_flags) \
 include $(make_dir)/Flags.mk
 
 # Targets
-.PHONY: all clean $(required_libraries)
+.PHONY: all clean 
 
 all: $(test_dir)/$(target).elf
 	@$(test_dir)/$(target).elf
-
-# $(test_dir)/$(target).elf: $(required_libraries)
-
-# $(required_libraries):
-# 	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@ testLibrary
 
 print-%  : ; @echo "$* = $($*)"
 

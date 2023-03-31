@@ -7,30 +7,40 @@
 # in other Makefile
 
 project_dir ?= ../..
-PLATFORM ?= ArmM7
 
 #include custom functions
 include $(make_dir)/Functions.mk
-$(call check-target)
+$(call check-tested_library_name)
+$(call check-project_name)
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
+
+# Target
+target := test$(project_name)-$(tested_library_name)
 
 # libraries
 LDFLAGS := \
 $(external_library_paths)
 
+required_libraries := $(tested_library_name) $(required_libraries)
+
 # Includes
+library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+
 cxx_includes += \
 $(library_includes) \
+$(external_library_includes) \
 
 # libraries
-LDLIBS := -lc -lm -lnosys \
+library_flags := $(addprefix -l$(project_name)-,$(required_libraries))
+
+LDLIBS :=  \
+$(platform_libraries) \
 $(library_flags) \
 $(external_library_flags) \
 
-binary_extensions := elf hex bin
-binaries := $(addprefix $(test_dir)/$(target)., $(binary_extensions))
+binaries := $(addprefix $(test_dir)/$(target)., $(platform_binary_extensions))
 
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk

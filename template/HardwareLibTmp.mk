@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 # Target
-target := 
+library_name := 
 
 # Directories
 project_dir := ..
@@ -24,6 +24,18 @@ cxx_includes :=  \
 
 # Defines
 cxx_defs := \
+
+# internal libraries
+export required_libraries = \
+
+# external libraries
+export external_library_includes = \
+
+# 	for testing purposes
+export external_library_flags = \
+
+# 	for testing purposes 
+export external_library_paths = \
 
 # Append rest of Makefile from template
 include $(make_dir)/HardwareLib.mk

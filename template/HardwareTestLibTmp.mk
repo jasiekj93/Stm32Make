@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 # Target
-target := 
+tested_library_name := 
 
 # Directories
 project_dir ?= ../..
@@ -20,16 +20,6 @@ cxx_includes := \
 
 # Defines
 cxx_defs := \
-
-# Libraries
-library_includes = \
--I.. \
-
-library_flags = \
-
-external_library_flags = \
-
-external_library_paths = \
 
 # Append rest of Makefile from template
 include $(make_dir)/HardwareTestLib.mk

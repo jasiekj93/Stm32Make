@@ -7,7 +7,7 @@
 export PLATFORM := ArmM7
 
 # project
-project_name :=
+export project_name :=
 
 # Directories
 project_dir := .

@@ -16,7 +16,6 @@ $(call check-project_name)
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
 
-
 # target
 target := lib$(project_name)-$(library_name)$(test_build_suffix)
 
@@ -25,6 +24,7 @@ library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_
 
 cxx_includes += \
 $(library_includes) \
+$(external_library_includes) \
 
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
@@ -41,7 +41,7 @@ ifeq ($(PLATFORM),Pc32)
 	@echo Creating library $(lib_dir)/$(target).test.a
 	@$(CP) $(lib_dir)/$(target).a $(lib_dir)/$(target).test.a
 else
-	+@$(MAKE) -C . library test_build_suffix=.test
+	+@$(MAKE) -C . library test_build_suffix=.test PLATFORM=Pc32
 endif
 
 tests: testLibrary

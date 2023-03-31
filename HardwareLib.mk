@@ -10,10 +10,22 @@ project_dir ?= ..
 
 #include custom functions
 include $(make_dir)/Functions.mk
-$(call check-target)
+$(call check-library_name)
+$(call check-project_name)
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
+
+# target
+target := lib$(project_name)-$(library_name)$(test_build_suffix)
+
+# Includes
+library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+
+cxx_includes += \
+$(library_includes) \
+$(external_library_includes) \
+
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
 
