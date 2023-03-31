@@ -16,11 +16,14 @@ make_dir := $(project_dir)/make
 # External libraries
 external_names = \
 
-# Project libraries
+# Project internal libraries
 internal_library_names = \
 
 # Project subprograms
 program_names = \
+
+# Project libraries
+library_names = \
 
 # Append rest of Makefile from template
 include $(make_dir)/Main.mk

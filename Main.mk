@@ -26,25 +26,26 @@ project_dir := .
 
 internal_library_dirs := $(addprefix lib$(project_name)-, $(internal_library_names))
 program_dirs := $(program_names)
+library_dirs := $(library_names)
 external_dirs := $(addprefix $(external_lib_dir)/, $(external_names))
 
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
 
 # targets
-.PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) rebuild clean mrproper distclean
+.PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) rebuild clean mrproper distclean
 
-debug: $(external_dirs) $(internal_library_dirs) $(program_dirs)
+debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 	@echo "Building time: [$(build_time) seconds]"
 
 release:
 	+@$(MAKE) --directory=$(project_dir) build_type=release
 
-$(program_dirs): $(external_dirs) $(internal_library_dirs)
+$(program_dirs) $(library_dirs): $(external_dirs) $(internal_library_dirs)
 
 $(internal_library_dirs): $(external_dirs)
 
-$(internal_library_dirs) $(external_dirs) $(program_dirs):
+$(internal_library_dirs) $(external_dirs) $(program_dirs) $(library_dirs):
 	@echo Making libraries:
 	+@$(MAKE) --directory=$@
 
