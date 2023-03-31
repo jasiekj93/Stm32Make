@@ -21,10 +21,11 @@ binaries := $(addprefix $(bin_dir)/$(target)., $(platform_binary_extensions))
 
 # libraries
 LDFLAGS := \
-$(external_library_paths)
+$(addprefix -L$(external_dir)/,$(external_library_paths))
 
 # Includes
 library_includes = $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
 
 cxx_includes += \
 $(library_includes) \
@@ -39,9 +40,6 @@ $(library_flags) \
 $(external_library_flags) \
 
 LDLIBS += $(LDLIBS)
-
-# Library path
-LDFLAGS	+= $(external_library_paths)
 
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk

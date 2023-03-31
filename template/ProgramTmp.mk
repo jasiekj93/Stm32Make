@@ -25,10 +25,14 @@ cxx_defs := \
 required_libraries = \
 
 # external libraries
-external_library_includes = \
+#	e.g. if include flag is '-I$(external_dir)/libFoo'
+#	write 'libFoo'
+external_library_include_path = \
 
 external_library_flags = \
 
+#	e.g. if link flag is '-L$(external_dir)/libFoo/lib'
+#	write 'libFoo/lib'
 external_library_paths = \
 
 # Linker script
