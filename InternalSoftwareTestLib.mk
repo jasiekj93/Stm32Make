@@ -18,7 +18,7 @@ $(call check-project_name)
 include $(make_dir)/Configuration.mk
 
 # Target
-target := test$(project_name)-$(tested_library_name)$(platform_name_postfix)
+target := test$(project_name)-$(tested_library_name)
 
 # libraries
 LDFLAGS := \
@@ -36,7 +36,7 @@ $(external_library_includes) \
 -I$(external_lib_dir)/CppUTest/include \
 
 # libraries
-library_flags := $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(required_libraries)))
+library_flags := $(addsuffix .test,$(addprefix -l$(project_name)-,$(required_libraries)))
 
 LDLIBS := \
 -lCppUTest \
@@ -47,10 +47,15 @@ $(external_library_flags) \
 include $(make_dir)/Flags.mk
 
 # Targets
-.PHONY: all clean
+.PHONY: all clean $(required_libraries)
 
 all: $(test_dir)/$(target).elf
 	@$(test_dir)/$(target).elf
+
+# $(test_dir)/$(target).elf: $(required_libraries)
+
+# $(required_libraries):
+# 	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@ testLibrary
 
 print-%  : ; @echo "$* = $($*)"
 

@@ -9,9 +9,6 @@
 # Toolchain
 toolchain_prefix := arm-none-eabi-
 
-# Name postfix
-platform_name_postfix := 
-
 # Mcu definition
 cpu := -mcpu=cortex-m4
 fpu := -mfpu=fpv4-sp-d16

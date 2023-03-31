@@ -17,7 +17,7 @@ $(call check-project_name)
 include $(make_dir)/Configuration.mk
 
 # target
-target := lib$(project_name)-$(library_name)$(platform_name_postfix)
+target := lib$(project_name)-$(library_name)
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))

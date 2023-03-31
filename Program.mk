@@ -31,7 +31,7 @@ $(library_includes) \
 $(external_library_includes) \
 
 # libraries
-library_flags = $(addsuffix $(platform_name_postfix),$(addprefix -l$(project_name)-,$(required_libraries)))
+library_flags = $(addprefix -l$(project_name)-,$(required_libraries))
 
 LDLIBS := \
 $(platform_libraries) \

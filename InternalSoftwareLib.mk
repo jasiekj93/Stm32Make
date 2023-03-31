@@ -16,8 +16,9 @@ $(call check-project_name)
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
 
+
 # target
-target := lib$(project_name)-$(library_name)$(platform_name_postfix)
+target := lib$(project_name)-$(library_name)$(test_build_suffix)
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
@@ -29,16 +30,21 @@ $(library_includes) \
 include $(make_dir)/Flags.mk
 
 # Targets
-.PHONY: all library pcLibrary tests clean
+.PHONY: all library testLibrary tests clean
 
-all: library pcLibrary tests
+all: library testLibrary tests
 
 library: $(lib_dir)/$(target).a
 
-pcLibrary: 
-	+@$(MAKE) -C . library PLATFORM=Pc32 
+testLibrary: library
+ifeq ($(PLATFORM),Pc32)
+	@echo Creating library $(lib_dir)/$(target).test.a
+	@$(CP) $(lib_dir)/$(target).a $(lib_dir)/$(target).test.a
+else
+	+@$(MAKE) -C . library test_build_suffix=.test
+endif
 
-tests: pcLibrary
+tests: testLibrary
 	+@$(MAKE) -C tests PLATFORM=Pc32
 
 print-%  : ; @echo "$* = $($*)"

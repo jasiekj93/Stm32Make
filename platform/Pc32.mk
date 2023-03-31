@@ -9,9 +9,6 @@
 # Toolchain
 toolchain_prefix := 
 
-# Name postfix
-platform_name_postfix := Pc32
-
 # Mcu definition
 mcu := -m32
 
