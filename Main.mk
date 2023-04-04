@@ -33,12 +33,12 @@ external_dirs := $(addprefix $(external_lib_dir)/, $(external_names))
 include $(make_dir)/Flags.mk
 
 # targets
-.PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) rebuild clean mrproper distclean
+.PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) rebuild clean mrproper distclean documentation
 
 debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 	@echo "Building time: [$(build_time) seconds]"
 
-release:
+release: documentation
 	+@$(MAKE) --directory=$(project_dir) build_type=release
 
 
@@ -58,6 +58,9 @@ rebuild:
 	-@$(RMDIR) $(bin_dir)
 	+@$(MAKE) -C .
  
+documentation:
+	+@$(MAKE) --directory=$(docs_dir)
+
 # clean up
 clean:
 	@echo Cleaning build directory
@@ -69,6 +72,8 @@ mrproper: clean
 	-@$(RMDIR) $(bin_root_dir)
 	-@$(RMDIR) $(lib_root_dir)
 	-@$(RMDIR) $(test_root_dir)
+	-+@$(MAKE) --directory=$(docs_dir) clean 
+
 
 distclean: mrproper
 	@echo Cleaning all external projects
