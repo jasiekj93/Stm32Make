@@ -35,12 +35,12 @@ include $(make_dir)/Flags.mk
 
 all: library testLibrary tests
 
-library: $(lib_dir)/$(target).a
+library: $(lib_internal_dir)/$(target).a
 
 testLibrary: library
 ifeq ($(PLATFORM),Pc32)
-	@echo Creating library $(lib_dir)/$(target).test.a
-	@$(CP) $(lib_dir)/$(target).a $(lib_dir)/$(target).test.a
+	@echo Creating library $(lib_internal_dir)/$(target).test.a
+	@$(CP) $(lib_internal_dir)/$(target).a $(lib_internal_dir)/$(target).test.a
 else
 	+@$(MAKE) -C . library test_build_suffix=.test PLATFORM=Pc32
 endif

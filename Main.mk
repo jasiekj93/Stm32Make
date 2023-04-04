@@ -33,7 +33,8 @@ external_dirs := $(addprefix $(external_lib_dir)/, $(external_names))
 include $(make_dir)/Flags.mk
 
 # targets
-.PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) rebuild clean mrproper distclean documentation
+.PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) \
+rebuild clean mrproper distclean $(docs_dir) documentation install uninstall
 
 debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 	@echo "Building time: [$(build_time) seconds]"
@@ -60,6 +61,21 @@ rebuild:
  
 documentation:
 	+@$(MAKE) --directory=$(docs_dir)
+
+# install
+ifeq ($(PREFIX),)
+    PREFIX := /usr/local
+endif 
+
+install: release
+	-+@for dir in $(program_dirs) $(library_dirs) $(docs_dir); do \
+		$(MAKE) --directory=$$dir install; \
+	done
+
+uninstall: 
+	-+@for dir in $(program_dirs) $(library_dirs) $(docs_dir); do \
+		$(MAKE) --directory=$$dir uninstall; \
+	done
 
 # clean up
 clean:

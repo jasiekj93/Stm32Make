@@ -28,7 +28,7 @@ vpath %.1 $(sort $(dir $(programs)))
 vpath %.3 $(sort $(dir $(libraries)))
 
 #targets
-.PHONY: all clean text html pdf
+.PHONY: all clean text html pdf install uninstall
 
 all: text html pdf
 text: $(text_targets)
@@ -68,3 +68,28 @@ $(text_dir) $(pdf_dir) $(html_dir):
 clean:
 	@echo Cleaning man pages
 	-@$(RMDIR) $(text_dir) $(html_dir) $(pdf_dir)
+
+# install
+ifeq ($(PREFIX),)
+    PREFIX := /usr/local
+endif 
+
+installed_programs := $(addprefix $(DESTDIR)$(PREFIX)/share/man/man1/,$(notdir $(programs)))
+installed_libraries := $(addprefix $(DESTDIR)$(PREFIX)/share/man/man3/,$(notdir $(libraries)))
+
+install: $(installed_programs) $(installed_libraries)
+	$(call check-install-platform)
+
+$(DESTDIR)$(PREFIX)/share/man/man1/%.1: %.1 Makefile
+	@echo Installing man pages $< 
+	@install -d $(DESTDIR)$(PREFIX)/share/man/man1
+	@install -m 644 $< $(DESTDIR)$(PREFIX)/share/man/man1
+
+$(DESTDIR)$(PREFIX)/share/man/man3/%.3: %.3 Makefile
+	@echo Installing man pages $< 
+	@install -d $(DESTDIR)$(PREFIX)/share/man/man3
+	@install -m 644 $< $(DESTDIR)$(PREFIX)/share/man/man3
+
+uninstall:
+	@echo Uninstalling man pages
+	-@$(RM) $(installed_programs) $(installed_libraries)

@@ -50,7 +50,7 @@ LDFLAGS += -T$(ldscript)
 endif
 
 # Targets
-.PHONY: all clean
+.PHONY: all clean install uninstall
 
 all: $(binaries)
 
@@ -68,3 +68,20 @@ include $(make_dir)/BuildRules.mk
 clean:
 	@echo Cleaning	
 	-@$(RMDIR) $(build_dir)
+
+# install
+ifeq ($(PREFIX),)
+    PREFIX := /usr/local
+endif 
+
+install: $(bin_dir)/$(target).elf
+	$(call check-install-platform)
+	@echo Installing $< 
+	@$(CP) $< $(basename $<)
+	@install -d $(DESTDIR)$(PREFIX)/bin/
+	@install -m 755 $(basename $<) $(DESTDIR)$(PREFIX)/bin/
+	@$(RM) $(basename $<)
+
+uninstall:
+	@echo Uninstalling $(target)
+	-@$(RM) $(DESTDIR)$(PREFIX)/bin/$(target)

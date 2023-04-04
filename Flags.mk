@@ -44,5 +44,5 @@ ASFLAGS += $(mcu) $(asm_defs) $(asm_includes) $(optimalization) -Wall -fdata-sec
 
 # Linker flags and directories
 # Libraries are stored in variable LDLIBS
-LDFLAGS += $(mcu) -L$(lib_dir) -Wl,-Map=$(build_dir)/$(target).map,--cref -Wl,--gc-sections
+LDFLAGS += $(mcu) -L$(lib_dir) -L$(lib_internal_dir) -Wl,-Map=$(build_dir)/$(target).map,--cref -Wl,--gc-sections
 LDFLAGS += $(platform_linker_flags)

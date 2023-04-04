@@ -17,6 +17,7 @@ test_root_dir = $(project_dir)/test
 build_dir = $(project_dir)/build/$(build_type)/$(target)
 bin_dir = $(project_dir)/bin/$(build_type)
 lib_dir = $(project_dir)/lib/$(build_type)
+lib_internal_dir = $(project_dir)/lib/$(build_type)/internal
 test_dir = $(project_dir)/test/$(build_type)
 external_lib_dir = $(project_dir)/external
 docs_dir = $(project_dir)/docs
