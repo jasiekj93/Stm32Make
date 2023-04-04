@@ -41,12 +41,14 @@ debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 release:
 	+@$(MAKE) --directory=$(project_dir) build_type=release
 
-$(program_dirs) $(library_dirs): $(external_dirs) $(internal_library_dirs)
+
+$(program_dirs): $(library_dirs) $(external_dirs) $(internal_library_dirs)
+
+$(library_dirs): $(external_dirs) $(internal_library_dirs)
 
 $(internal_library_dirs): $(external_dirs)
 
 $(internal_library_dirs) $(external_dirs) $(program_dirs) $(library_dirs):
-	@echo Making libraries:
 	+@$(MAKE) --directory=$@
 
 print-%: ; @echo "$* = $($*)"
