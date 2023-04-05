@@ -28,7 +28,7 @@ $(external_library_includes) \
 include $(make_dir)/Flags.mk
 
 # Targets
-.PHONY: all library testLibrary tests clean
+.PHONY: all library testLibrary tests clean install
 
 all: library testLibrary tests
 
@@ -52,12 +52,29 @@ clean:
 	@echo Cleaning
 	-@$(RMDIR) $(build_dir)
 
-#install
-#ifeq ($(PREFIX),)
-#    PREFIX := /usr/local
-#endif 
+# install
+ifeq ($(PREFIX),)
+   PREFIX := /usr/local
+endif 
 
-# install -d $(DESTDIR)$(PREFIX)/lib/
-# install -m 644 unixlib.a $(DESTDIR)$(PREFIX)/lib/
-# install -d $(DESTDIR)$(PREFIX)/include/
-# install -m 644 unixlib.h $(DESTDIR)$(PREFIX)/include/
+install: $(lib_dir)/$(target).a
+	$(call check-install-platform)
+	@echo Installing $<
+	@install -d $(DESTDIR)$(PREFIX)/lib/
+	@install -m 644 $(lib_dir)/$(target).a $(DESTDIR)$(PREFIX)/lib/
+	@install -d $(DESTDIR)$(PREFIX)/include/
+	@install -m 644 $(installed_include_files) $(DESTDIR)$(PREFIX)/include/
+	@for dir in $(installed_include_directories); do \
+		install -d $(DESTDIR)$(PREFIX)/include/$$dir; \
+		install -m 644 $$dir/*.hpp $(DESTDIR)$(PREFIX)/include/$$dir; \
+	done
+
+uninstall:
+	@echo Uninstalling $(target).a
+	-@$(RM) $(DESTDIR)$(PREFIX)/lib/$(target).a
+	-@for dir in $(installed_include_directories); do \
+		$(RMDIR) $(DESTDIR)$(PREFIX)/include/$$dir; \
+	done
+	-@for file in $(installed_include_files); do \
+		$(RM) $(DESTDIR)$(PREFIX)/include/$$file; \
+	done

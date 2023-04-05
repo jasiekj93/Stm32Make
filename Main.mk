@@ -60,7 +60,7 @@ rebuild:
 	+@$(MAKE) -C .
  
 documentation:
-	+@$(MAKE) --directory=$(docs_dir)
+	+-@$(MAKE) --directory=$(docs_dir)
 
 # install
 ifeq ($(PREFIX),)
