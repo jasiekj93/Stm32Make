@@ -3,6 +3,10 @@
 # @date 06-03-2023
 # ------------------------------------------------
 
+# Platform
+# Uncomment if program platform must be diffrent than the solution
+# PLATFORM := Pc32
+
 # Target
 target := 
 

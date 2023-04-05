@@ -16,7 +16,7 @@ $(call check-library_name)
 include $(make_dir)/Configuration.mk
 
 # target
-target := lib$(library_name)$(test_build_suffix)
+target := lib$(library_name)
 
 # Includes
 external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
@@ -35,11 +35,8 @@ all: library testLibrary tests
 library: $(lib_dir)/$(target).a
 
 testLibrary: 
-ifeq ($(PLATFORM),Pc32)
-	@echo Creating library $(lib_dir)/$(target).test.a
-	@$(CP) $(lib_dir)/$(target).a $(lib_dir)/$(target).test.a
-else
-	+@$(MAKE) -C . library test_build_suffix=.test PLATFORM=Pc32
+ifneq ($(PLATFORM),Pc32)
+	+@$(MAKE) -C . library PLATFORM=Pc32
 endif
 
 tests: testLibrary

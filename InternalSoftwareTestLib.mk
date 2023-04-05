@@ -37,7 +37,7 @@ $(external_library_includes) \
 -I$(external_lib_dir)/CppUTest/include \
 
 # libraries
-library_flags := $(addsuffix .test,$(addprefix -l$(project_name)-,$(required_libraries)))
+library_flags := $(addprefix -l$(project_name)-,$(required_libraries))
 
 LDLIBS := \
 -lCppUTest \

@@ -57,10 +57,14 @@ endif
 
 all: $(binaries)
 
-# $(binaries): $(required_internal_libraries)
+# build required libraries if program platform is diffrent than the solution 
+$(binaries): $(required_libraries) $(required_internal_libraries)
 
-# $(required_libraries):
-# 	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@
+$(required_internal_libraries):
+	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@ PLATFORM=$(PLATFORM)
+
+$(required_libraries):
+	+@$(MAKE) -C $(project_dir)/$@ PLATFORM=$(PLATFORM)
 
 print-%  : ; @echo "$* = $($*)"
 
