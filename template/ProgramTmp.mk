@@ -5,7 +5,7 @@
 
 # Platform
 # Uncomment if program platform must be diffrent than the solution
-# PLATFORM := Pc32
+# override PLATFORM := Pc32
 
 # Target
 target := 

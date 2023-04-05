@@ -38,9 +38,7 @@ all: library testLibrary tests
 library: $(lib_internal_dir)/$(target).a
 
 testLibrary: library
-ifneq ($(PLATFORM),Pc32)
 	+@$(MAKE) -C . library PLATFORM=Pc32
-endif
 
 tests: testLibrary
 	+@$(MAKE) -C tests PLATFORM=Pc32

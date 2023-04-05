@@ -34,5 +34,10 @@ export external_library_flags = \
 #	write 'libFoo/lib'
 export external_library_paths = \
 
+# Install configuration
+installed_include_files = \
+
+installed_include_directories = \
+
 # Append rest of Makefile from template
 include $(make_dir)/SoftwareLib.mk
