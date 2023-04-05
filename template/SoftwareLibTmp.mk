@@ -1,6 +1,6 @@
 # ------------------------------------------------
 # @author Adrian Szczepanski
-# @date 06-03-2023
+# @date 06-03-2022
 # ------------------------------------------------
 
 # Target
@@ -21,25 +21,18 @@ cxx_includes := \
 # Defines
 cxx_defs := \
 
-# internal libraries
-required_internal_libraries = \
-
-# libraries
-required_libraries = \
-
 # external libraries
 #	e.g. if include flag is '-I$(external_dir)/libFoo'
 #	write 'libFoo'
-external_library_include_path = \
+export external_library_include_path = \
 
-external_library_flags = \
+# 	for testing purpose - use only PC 32-bit version
+export external_library_flags = \
 
+# 	for testing purposes - use only PC 32-bit version
 #	e.g. if link flag is '-L$(external_dir)/libFoo/lib'
 #	write 'libFoo/lib'
-external_library_paths = \
-
-# Linker script
-ldscript = 
+export external_library_paths = \
 
 # Append rest of Makefile from template
-include $(make_dir)/Program.mk
+include $(make_dir)/SoftwareLib.mk

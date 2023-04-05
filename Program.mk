@@ -24,15 +24,18 @@ LDFLAGS := \
 $(addprefix -L$(external_dir)/,$(external_library_paths))
 
 # Includes
-library_includes = $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
+library_includes := $(addprefix -I$(project_dir)/,$(required_libraries))
+internal_library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_internal_libraries))
 external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
 
 cxx_includes += \
 $(library_includes) \
+$(internal_library_includes) \
 $(external_library_includes) \
 
 # libraries
-library_flags = $(addprefix -l$(project_name)-,$(required_libraries))
+library_flags = $(addprefix -l$(project_name)-,$(required_internal_libraries))
+library_flags += $(addprefix -l,$(required_libraries))
 
 LDLIBS := \
 $(platform_libraries) \
@@ -54,10 +57,10 @@ endif
 
 all: $(binaries)
 
-$(binaries): $(required_libraries)
+# $(binaries): $(required_internal_libraries)
 
-$(required_libraries):
-	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@
+# $(required_libraries):
+# 	+@$(MAKE) -C $(project_dir)/lib$(project_name)-$@
 
 print-%  : ; @echo "$* = $($*)"
 

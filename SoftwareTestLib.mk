@@ -1,49 +1,56 @@
 # ------------------------------------------------
 # @author Adrian Szczepanski
-# @date 06-03-2022
+# @date 06-03-2023
 # ------------------------------------------------
 
 # This file is only a template and should be included 
 # in other Makefile
 
-project_dir ?= ..
+project_dir ?= ../..
+PLATFORM := Pc32
 
 #include custom functions
 include $(make_dir)/Functions.mk
-$(call check-library_name)
+$(call check-tested_library_name)
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
 
-# target
-target := lib$(library_name)$(test_build_suffix)
+# Target
+target := test$(tested_library_name)
+
+# libraries
+LDFLAGS := \
+-L$(external_lib_dir)/CppUTest/lib/Pc32 \
+$(addprefix -L$(external_dir)/,$(external_library_paths))
+
+required_libraries := $(tested_library_name)
 
 # Includes
+library_includes := $(addprefix -I$(project_dir)/,$(required_libraries))
 external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
 
 cxx_includes += \
+$(library_includes) \
 $(external_library_includes) \
+-I$(external_lib_dir)/CppUTest/include \
+
+# libraries
+library_flags := $(addsuffix .test,$(addprefix -l,$(required_libraries)))
+
+LDLIBS := \
+-lCppUTest \
+$(library_flags) \
+$(external_library_flags) \
 
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
 
 # Targets
-.PHONY: all library testLibrary tests clean
+.PHONY: all clean 
 
-all: library testLibrary tests
-
-library: $(lib_dir)/$(target).a
-
-testLibrary: 
-ifeq ($(PLATFORM),Pc32)
-	@echo Creating library $(lib_dir)/$(target).test.a
-	@$(CP) $(lib_dir)/$(target).a $(lib_dir)/$(target).test.a
-else
-	+@$(MAKE) -C . library test_build_suffix=.test PLATFORM=Pc32
-endif
-
-tests: testLibrary
-	+@$(MAKE) -C tests PLATFORM=Pc32
+all: $(test_dir)/$(target).elf
+	@$(test_dir)/$(target).elf
 
 print-%  : ; @echo "$* = $($*)"
 
@@ -52,15 +59,6 @@ include $(make_dir)/BuildRules.mk
 
 # clean up
 clean:
-	@echo Cleaning
+	@echo Cleaning	
 	-@$(RMDIR) $(build_dir)
 
-#install
-#ifeq ($(PREFIX),)
-#    PREFIX := /usr/local
-#endif 
-
-# install -d $(DESTDIR)$(PREFIX)/lib/
-# install -m 644 unixlib.a $(DESTDIR)$(PREFIX)/lib/
-# install -d $(DESTDIR)$(PREFIX)/include/
-# install -m 644 unixlib.h $(DESTDIR)$(PREFIX)/include/
