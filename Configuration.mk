@@ -20,7 +20,6 @@ lib_dir = $(project_dir)/lib/$(PLATFORM)/$(build_type)
 lib_internal_dir = $(project_dir)/lib/$(PLATFORM)/$(build_type)/internal
 test_dir = $(project_dir)/test/$(build_type)
 external_lib_dir = $(project_dir)/external
-docs_dir = $(project_dir)/docs
 
 # Include platform specific settings
 include $(make_dir)/platform/$(PLATFORM).mk

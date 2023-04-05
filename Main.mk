@@ -34,7 +34,7 @@ include $(make_dir)/Flags.mk
 
 # targets
 .PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) \
-rebuild clean mrproper distclean $(docs_dir) documentation install uninstall
+rebuild clean mrproper distclean documentation install uninstall
 
 debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 	@echo "Building time: [$(build_time) seconds]"
@@ -60,7 +60,9 @@ rebuild:
 	+@$(MAKE) -C .
  
 documentation:
-	+-@$(MAKE) --directory=$(docs_dir)
+ifneq ($(docs_dir),)
+	-+@$(MAKE) --directory=$(docs_dir)
+endif
 
 # install
 ifeq ($(PREFIX),)
@@ -68,14 +70,13 @@ ifeq ($(PREFIX),)
 endif 
 
 install: release
-	-+@for dir in $(program_dirs) $(library_dirs) $(docs_dir); do \
-		$(MAKE) --directory=$$dir install; \
-	done
 
-uninstall: 
-	-+@for dir in $(program_dirs) $(library_dirs) $(docs_dir); do \
-		$(MAKE) --directory=$$dir uninstall; \
-	done
+install uninstall: 
+	-+@for dir in $(program_dirs); do $(MAKE) --directory=$$dir $@ build_type=release; done
+	-+@for dir in $(library_dirs); do $(MAKE) --directory=$$dir $@ build_type=release; done
+ifneq ($(docs_dir),)
+	-+@$(MAKE) --directory=$(docs_dir) $@
+endif
 
 # clean up
 clean:
@@ -88,7 +89,9 @@ mrproper: clean
 	-@$(RMDIR) $(bin_root_dir)
 	-@$(RMDIR) $(lib_root_dir)
 	-@$(RMDIR) $(test_root_dir)
+ifneq ($(docs_dir),)
 	-+@$(MAKE) --directory=$(docs_dir) clean 
+endif 
 
 
 distclean: mrproper

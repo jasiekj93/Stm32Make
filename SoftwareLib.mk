@@ -28,16 +28,14 @@ $(external_library_includes) \
 include $(make_dir)/Flags.mk
 
 # Targets
-.PHONY: all library testLibrary tests clean install
+.PHONY: all library testLibrary tests clean install uninstall
 
 all: library testLibrary tests
 
 library: $(lib_dir)/$(target).a
 
 testLibrary: 
-ifneq ($(PLATFORM),Pc32)
 	+@$(MAKE) -C . library PLATFORM=Pc32
-endif
 
 tests: testLibrary
 	+@$(MAKE) -C tests PLATFORM=Pc32
@@ -58,7 +56,7 @@ ifeq ($(PREFIX),)
 endif 
 
 install: $(lib_dir)/$(target).a
-	$(call check-install-platform)
+ifeq ($(PLATFORM),Pc32)
 	@echo Installing $<
 	@install -d $(DESTDIR)$(PREFIX)/lib/
 	@install -m 644 $(lib_dir)/$(target).a $(DESTDIR)$(PREFIX)/lib/
@@ -68,8 +66,12 @@ install: $(lib_dir)/$(target).a
 		install -d $(DESTDIR)$(PREFIX)/include/$$dir; \
 		install -m 644 $$dir/*.hpp $(DESTDIR)$(PREFIX)/include/$$dir; \
 	done
+else
+	$(warning WARNING: Platform $(PLATFORM) is not supporting installation! Skipped for $<.)
+endif
 
 uninstall:
+ifeq ($(PLATFORM),Pc32)
 	@echo Uninstalling $(target).a
 	-@$(RM) $(DESTDIR)$(PREFIX)/lib/$(target).a
 	-@for dir in $(installed_include_directories); do \
@@ -78,3 +80,6 @@ uninstall:
 	-@for file in $(installed_include_files); do \
 		$(RM) $(DESTDIR)$(PREFIX)/include/$$file; \
 	done
+else
+	$(warning WARNING: Platform $(PLATFORM) is not supporting installation! Skipped for $<.)
+endif

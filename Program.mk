@@ -53,7 +53,7 @@ LDFLAGS += -T$(ldscript)
 endif
 
 # Targets
-.PHONY: all clean install uninstall
+.PHONY: all clean install uninstall $(required_libraries) $(required_internal_libraries) 
 
 all: $(binaries)
 
@@ -82,13 +82,20 @@ ifeq ($(PREFIX),)
 endif 
 
 install: $(bin_dir)/$(target).elf
-	$(call check-install-platform)
+ifeq ($(PLATFORM),Pc32)
 	@echo Installing $< 
 	@$(CP) $< $(basename $<)
 	@install -d $(DESTDIR)$(PREFIX)/bin/
 	@install -m 755 $(basename $<) $(DESTDIR)$(PREFIX)/bin/
 	@$(RM) $(basename $<)
+else
+	$(warning WARNING: Platform $(PLATFORM) is not supporting installation! Skipped for $<.)
+endif
 
 uninstall:
+ifeq ($(PLATFORM),Pc32)
 	@echo Uninstalling $(target)
 	-@$(RM) $(DESTDIR)$(PREFIX)/bin/$(target)
+else
+	$(warning WARNING: Platform $(PLATFORM) is not supporting installation! Skipped for $<.)
+endif

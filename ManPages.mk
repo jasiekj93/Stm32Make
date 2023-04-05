@@ -78,7 +78,6 @@ installed_programs := $(addprefix $(DESTDIR)$(PREFIX)/share/man/man1/,$(notdir $
 installed_libraries := $(addprefix $(DESTDIR)$(PREFIX)/share/man/man3/,$(notdir $(libraries)))
 
 install: $(installed_programs) $(installed_libraries)
-	$(call check-install-platform)
 
 $(DESTDIR)$(PREFIX)/share/man/man1/%.1: %.1 Makefile
 	@echo Installing man pages $< 

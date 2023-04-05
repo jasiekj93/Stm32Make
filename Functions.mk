@@ -39,9 +39,3 @@ define check-tested_library_name
 $(if $(tested_library_name),,$\
 	$(error ERROR: Variable 'tested_library_name' is empty!))
 endef
-
-#$(call check-install-platform)
-define check-install-platform
-$(if $(filter $(PLATFORM),Pc32),,$\
-	$(error ERROR: Platform $(PLATFORM) is not supporting installation!))
-endef
