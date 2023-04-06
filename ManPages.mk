@@ -10,9 +10,9 @@
 include $(make_dir)/Configuration.mk
 
 # directoires
-text_dir := $(docs_dir)/text
-html_dir := $(docs_dir)/html
-pdf_dir := $(docs_dir)/pdf
+text_dir := $(project_dir)/$(docs_dir)/text
+html_dir := $(project_dir)/$(docs_dir)/html
+pdf_dir := $(project_dir)/$(docs_dir)/pdf
 
 # source files and targets
 text_targets := \

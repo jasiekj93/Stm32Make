@@ -13,6 +13,9 @@ export project_name :=
 project_dir := .
 make_dir := $(project_dir)/make
 
+# Documentation directory
+export docs_dir := docs
+
 # External libraries
 external_names = \
 
