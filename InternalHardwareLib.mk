@@ -35,7 +35,7 @@ include $(make_dir)/Flags.mk
 
 all: library tests
 
-library: $(lib_dir)/$(target).a
+library: $(lib_internal_dir)/$(target).a
 
 tests: library
 	+@$(MAKE) -C tests 

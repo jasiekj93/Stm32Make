@@ -17,7 +17,7 @@ $(call check-project_name)
 include $(make_dir)/Configuration.mk
 
 # target
-target := lib$(project_name)-$(library_name)$(test_build_suffix)
+target := lib$(project_name)-$(library_name)
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
@@ -39,12 +39,7 @@ library: $(lib_internal_dir)/$(target).a
 
 # only for use by tests in other libraries
 testLibrary: library
-ifeq ($(PLATFORM),Pc32)
-	@echo Creating library $(lib_internal_dir)/$(target).test.a
-	@$(CP) $(lib_internal_dir)/$(target).a $(lib_internal_dir)/$(target).test.a
-else
-	+@$(MAKE) -C . library test_build_suffix=.test PLATFORM=Pc32
-endif
+	+@$(MAKE) -C . library PLATFORM=Pc32
 
 print-%  : ; @echo "$* = $($*)"
 

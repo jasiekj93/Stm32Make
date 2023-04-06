@@ -50,7 +50,7 @@ $(library_dirs): $(external_dirs) $(internal_library_dirs)
 
 $(internal_library_dirs): $(external_dirs)
 
-$(internal_library_dirs) $(external_dirs) $(program_dirs) $(library_dirs):
+$(internal_library_dirs) $(program_dirs) $(library_dirs):
 	+@$(MAKE) --directory=$@
 
 $(external_dirs):

@@ -24,7 +24,7 @@ include $(make_dir)/Flags.mk
 # Targets
 .PHONY: all library clean
 
-all: $(lib_dir)/$(target).a
+all: $(lib_internal_dir)/$(target).a
 
 print-%  : ; @echo $* = $($*)
 
