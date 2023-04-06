@@ -93,7 +93,6 @@ ifneq ($(docs_dir),)
 	-+@$(MAKE) --directory=$(docs_dir) clean 
 endif 
 
-
 distclean: mrproper
 	@echo Cleaning all external projects
 	-+@for dir in $(external_dirs); do \
