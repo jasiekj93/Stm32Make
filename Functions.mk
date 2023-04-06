@@ -13,9 +13,16 @@ supported_platforms := $(notdir $\
 #$(call check-platform)
 define check-platform
 $(if $(filter $(PLATFORM),$(supported_platforms)),,$\
-	$(error ERROR: Platform $(PLATFORM) is not supported! Try $(supported_platforms).))
+	$(error ERROR: Platform $(PLATFORM) is not supported! Try '$(supported_platforms)'))
 endef
 
+supported_builds := debug release
+
+#$(call check-build)
+define check-build
+$(if $(filter $(BUILD),$(supported_builds)),,$\
+	$(error ERROR: Build $(BUILD) is not supported! Try '$(supported_builds)'))
+endef
 #$(call check-target)
 define check-target
 $(if $(target),,$\

@@ -12,6 +12,7 @@ include $(make_dir)/Configuration.mk
 #include custom functions
 include $(make_dir)/Functions.mk
 $(call check-platform)
+$(call check-build)
 $(call check-project_name)
 
 # Measuring time feature
@@ -40,7 +41,7 @@ debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 	@echo "Building time: [$(build_time) seconds]"
 
 release: documentation
-	+@$(MAKE) --directory=$(project_dir) build_type=release
+	+@$(MAKE) --directory=$(project_dir) BUILD=release
 
 
 $(program_dirs): $(library_dirs) $(external_dirs) $(internal_library_dirs)
@@ -72,8 +73,8 @@ endif
 install: release
 
 install uninstall: 
-	-+@for dir in $(program_dirs); do $(MAKE) --directory=$$dir $@ build_type=release; done
-	-+@for dir in $(library_dirs); do $(MAKE) --directory=$$dir $@ build_type=release; done
+	-+@for dir in $(program_dirs); do $(MAKE) --directory=$$dir $@ BUILD=release; done
+	-+@for dir in $(library_dirs); do $(MAKE) --directory=$$dir $@ BUILD=release; done
 ifneq ($(docs_dir),)
 	-+@$(MAKE) --directory=$(docs_dir) $@
 endif

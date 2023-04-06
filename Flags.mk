@@ -12,7 +12,7 @@ generate_debug_info = 0
 optimalization = -O0
 
 # Debug
-ifeq ($(build_type), debug)
+ifeq ($(BUILD), debug)
 generate_lst_files = 1
 generate_debug_info = 1
 optimalization = -O0

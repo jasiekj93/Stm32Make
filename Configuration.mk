@@ -6,7 +6,7 @@
 # This file is only a template and should be included 
 # in other Makefile
 PLATFORM ?= ArmM7
-build_type ?= debug
+BUILD ?= debug
 
 # directories
 project_dir ?= ..
@@ -14,11 +14,11 @@ build_root_dir = $(project_dir)/build
 bin_root_dir = $(project_dir)/bin
 lib_root_dir = $(project_dir)/lib
 test_root_dir = $(project_dir)/test
-build_dir = $(project_dir)/build/$(PLATFORM)/$(build_type)/$(target)
-bin_dir = $(project_dir)/bin/$(PLATFORM)/$(build_type)
-lib_dir = $(project_dir)/lib/$(PLATFORM)/$(build_type)
-lib_internal_dir = $(project_dir)/lib/$(PLATFORM)/$(build_type)/internal
-test_dir = $(project_dir)/test/$(build_type)
+build_dir = $(project_dir)/build/$(PLATFORM)/$(BUILD)/$(target)
+bin_dir = $(project_dir)/bin/$(PLATFORM)/$(BUILD)
+lib_dir = $(project_dir)/lib/$(PLATFORM)/$(BUILD)
+lib_internal_dir = $(project_dir)/lib/$(PLATFORM)/$(BUILD)/internal
+test_dir = $(project_dir)/test/$(BUILD)
 external_lib_dir = $(project_dir)/external
 
 # Include platform specific settings
