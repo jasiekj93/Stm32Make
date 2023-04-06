@@ -16,6 +16,8 @@ make_dir := $(project_dir)/make
 # External libraries
 external_names = \
 
+external_build_options = \
+
 # Project internal libraries
 internal_library_names = \
 

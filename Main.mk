@@ -53,6 +53,9 @@ $(internal_library_dirs): $(external_dirs)
 $(internal_library_dirs) $(external_dirs) $(program_dirs) $(library_dirs):
 	+@$(MAKE) --directory=$@
 
+$(external_dirs):
+	+@$(MAKE) --directory=$@ $(external_build_options)
+
 print-%: ; @echo "$* = $($*)"
 
 # rebuild

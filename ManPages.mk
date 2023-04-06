@@ -15,14 +15,17 @@ html_dir := $(docs_dir)/html
 pdf_dir := $(docs_dir)/pdf
 
 # source files and targets
-text_targets := $(addprefix $(text_dir)/,$(notdir $(programs:.1=.1.txt)))
-text_targets += $(addprefix $(text_dir)/,$(notdir $(libraries:.3=.3.txt)))
+text_targets := \
+$(addprefix $(text_dir)/,$(notdir $(programs:.1=.1.txt))) \
+$(addprefix $(text_dir)/,$(notdir $(libraries:.3=.3.txt))) \
 
-html_targets := $(addprefix $(html_dir)/,$(notdir $(programs:.1=.1.html)))
-html_targets += $(addprefix $(html_dir)/,$(notdir $(libraries:.3=.3.html)))
+html_targets := \
+$(addprefix $(html_dir)/,$(notdir $(programs:.1=.1.html))) \
+$(addprefix $(html_dir)/,$(notdir $(libraries:.3=.3.html))) \
 
-pdf_targets := $(addprefix $(pdf_dir)/,$(notdir $(programs:.1=.1.pdf)))
-pdf_targets += $(addprefix $(pdf_dir)/,$(notdir $(libraries:.3=.3.pdf)))
+pdf_targets := \
+$(addprefix $(pdf_dir)/,$(notdir $(programs:.1=.1.pdf))) \
+$(addprefix $(pdf_dir)/,$(notdir $(libraries:.3=.3.pdf))) \
 
 vpath %.1 $(sort $(dir $(programs)))
 vpath %.3 $(sort $(dir $(libraries)))
