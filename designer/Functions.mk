@@ -11,6 +11,6 @@ endef
 
 #$(call check-namespace)
 define check-namespace
-$(if $(NAMESPACE),,$\
+$(if $(full_namespace),,$\
 	$(error ERROR: Variable 'NAMESPACE' is empty!))
 endef

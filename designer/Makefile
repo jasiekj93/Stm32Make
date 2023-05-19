@@ -10,6 +10,7 @@ export AUTHOR ?= Adrian Szczepanski
 
 export NAME
 export NAMESPACE
+export SUBSPACE
 
 # internal variables
 make_repository := https://github.com/jasiekj93/Stm32Make

@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 include Functions.mk
-include Path.mk
+include Configuration.mk
 
 $(call check-name)
 $(call check-namespace)
@@ -24,7 +24,7 @@ define file_hpp
 
 #include <$(path)/$(NAME).hpp>
 
-namespace $(NAMESPACE)::mock
+namespace $(full_namespace)::mock
 {
 	class $(class_name) : public $(NAME)
 	{
@@ -39,8 +39,8 @@ endef
 define file_cpp
 #include "$(class_name).hpp"
 
-using namespace $(NAMESPACE);
-using namespace $(NAMESPACE)::mock;
+using namespace $(full_namespace);
+using namespace $(full_namespace)::mock;
 
 $(class_name)::$(class_name)()
 	: instance(this)

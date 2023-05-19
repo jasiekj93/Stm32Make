@@ -15,14 +15,14 @@ $(full_test_name).test.cpp: | $(test_path)
 	@echo "Creating file $@"
 	@$(file > $@,$(file_test_cpp))
 
-$(full_mock_name).cpp: | $(test_path)
+$(full_mock_name).cpp: | $(mock_path)
 	@echo "Creating file $@"
 	@$(file > $@,$(file_cpp))
 
-$(full_mock_name).hpp: | $(test_path)
+$(full_mock_name).hpp: | $(mock_path)
 	@echo "Creating file $@"
 	$(file > $@,$(file_hpp))
 
-$(full_path) $(test_path):
+$(full_path) $(test_path) $(mock_path):
 	@echo "Creating directory $@"
 	@mkdir -p $@

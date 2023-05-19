@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 include Functions.mk
-include Path.mk
+include Configuration.mk
 
 $(call check-name)
 $(call check-namespace)
@@ -18,7 +18,7 @@ define file_hpp
  * @date $(shell date +%Y-%M-%d)
  */
 
-namespace $(NAMESPACE)
+namespace $(full_namespace)
 {
 	class $(NAME)
 	{
@@ -33,7 +33,7 @@ endef
 define file_cpp
 #include "$(NAME).hpp"
 
-using namespace $(NAMESPACE);
+using namespace $(full_namespace);
 
 $(NAME)::$(NAME)()
 {
@@ -53,7 +53,7 @@ define file_test_cpp
 
 #include <CppUTest/TestHarness.h>
 
-using namespace $(NAMESPACE);
+using namespace $(full_namespace);
 
 TEST_GROUP($(NAME)Test)
 {

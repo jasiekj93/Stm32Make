@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 include Functions.mk
-include Path.mk
+include Configuration.mk
 
 $(call check-name)
 $(call check-namespace)
@@ -18,7 +18,7 @@ define file_hpp
  * @date $(shell date +%Y-%M-%d)
  */
 
-namespace $(NAMESPACE)
+namespace $(full_namespace)
 {
 	class $(NAME)
 	{

@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 include Functions.mk
-include Path.mk
+include Configuration.mk
 
 $(call check-name)
 $(call check-namespace)
@@ -24,7 +24,7 @@ define file_hpp
 
 #include <$(path)/$(NAME).hpp>
 
-namespace $(NAMESPACE)
+namespace $(full_namespace)
 {
 	class $(class_name) : public $(NAME)
 	{
@@ -39,7 +39,7 @@ endef
 define file_cpp
 #include "$(class_name).hpp"
 
-using namespace $(NAMESPACE);
+using namespace $(full_namespace);
 
 $(class_name)::$(class_name)()
 {
@@ -59,7 +59,7 @@ define file_test_cpp
 
 #include <CppUTest/TestHarness.h>
 
-using namespace $(NAMESPACE);
+using namespace $(full_namespace);
 
 TEST_GROUP($(class_name)Test)
 {
