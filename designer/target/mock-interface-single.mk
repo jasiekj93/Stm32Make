@@ -19,7 +19,7 @@ define file_hpp
 /**
  * @file $(class_name).hpp
  * @author $(AUTHOR)
- * @date $(shell date +%Y-%M-%d)
+ * @date $(shell date +%Y-%m-%d)
  */
 
 #include <$(path)/$(NAME).hpp>

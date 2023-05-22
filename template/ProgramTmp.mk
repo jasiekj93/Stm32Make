@@ -8,7 +8,7 @@
 # override PLATFORM := Pc32
 
 # Target
-target := 
+target := @program_name@
 
 # Directories
 project_dir ?= ..

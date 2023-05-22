@@ -25,6 +25,7 @@ interface-single \
 interface-single-impl \
 mock-interface \
 mock-interface-single \
+program \
 
 
 .PHONY: $(targets)

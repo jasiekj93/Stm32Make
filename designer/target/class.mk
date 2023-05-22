@@ -15,7 +15,7 @@ define file_hpp
 /**
  * @file $(NAME).hpp
  * @author $(AUTHOR)
- * @date $(shell date +%Y-%M-%d)
+ * @date $(shell date +%Y-%m-%d)
  */
 
 namespace $(full_namespace)
@@ -46,7 +46,7 @@ define file_test_cpp
 /**
  * @file $(NAME).test.cpp
  * @author $(AUTHOR)
- * @date $(shell date +%Y-%M-%d)
+ * @date $(shell date +%Y-%m-%d)
  */
 
 #include <$(path)/$(NAME).hpp>

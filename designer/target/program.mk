@@ -7,31 +7,34 @@ include Functions.mk
 include Configuration.mk
 
 $(call check-name)
-$(call check-namespace)
 
-define file_hpp
+ifneq ($(NAMESPACE),)
+program_namespace := $(NAMESPACE)::$(NAME)
+else
+program_namespace := $(NAME)
+endif
+
+define file_cpp
 #pragma once
 
 /**
- * @file $(NAME).hpp
+ * @file Main.cpp
  * @author $(AUTHOR)
  * @date $(shell date +%Y-%m-%d)
  */
 
-namespace $(full_namespace)
-{
-	class $(NAME)
-	{
-	public:
-		virtual ~$(NAME)() {}
+using namespace $(program_namespace);
 
-	};
+int main(int argc, char* argv[])
+{
+
+	return 0;
 }
 
 endef
 
-.PHONY: interface $(full_name).hpp 
+.PHONY: program $(full_program_name).cpp 
 
-interface: $(full_name).hpp 
+program: $(full_program_name).cpp  $(full_program_makefile)
 
 include BuildRules.mk
