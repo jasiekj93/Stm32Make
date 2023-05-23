@@ -14,13 +14,13 @@ source_dir := $(main_dir)/lib$(PROJECT)/$(NAME)
 
 make_file := $(main_dir)/Makefile
 
-.PHONY: lib-internal-sofware-no-tests $(make_file)
+.PHONY: lib-internal-hardware-no-tests $(make_file)
 
-lib-internal-sofware-no-tests: $(make_file) | $(main_dir) $(source_dir)
+lib-internal-hardware-no-tests: $(make_file) | $(main_dir) $(source_dir)
 
 $(make_file) : | $(main_dir)
 	@echo "Creating file $@"
-	@cp $(template_path)/InternalSoftwareLibNoTestsTmp.mk $@
+	@cp $(template_path)/InternalHardwareLibNoTestsTmp.mk $@
 	@$(SED) -i -e 's/@library_name@/$(NAME)/' $@
 	@$(SED) -i -e 's#@library_sources@#lib$(PROJECT)/$(NAME)#' $@
 

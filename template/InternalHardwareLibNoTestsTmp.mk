@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 # Target
-target := 
+target := @library_name@
 
 # Directories
 project_dir := ..
@@ -13,6 +13,7 @@ external_dir := $(project_dir)/external
 
 # Sources 
 cxx_sources =  \
+$(wildcard @library_sources@/*.cpp) \
 
 c_sources := \
 

@@ -18,7 +18,6 @@ make_repository := https://github.com/jasiekj93/Stm32Make
 
 # targets
 targets := \
-project \
 class \
 interface \
 interface-impl \
@@ -29,6 +28,9 @@ mock-interface-single \
 program \
 lib-internal-software \
 lib-internal-software-no-tests \
+lib-internal-hardware \
+lib-internal-hardware-no-tests \
+lib-software \
 
 
 .PHONY: $(targets)
