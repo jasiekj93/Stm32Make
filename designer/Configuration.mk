@@ -12,11 +12,11 @@ template_path := ../template
 full_namespace := $(NAMESPACE)::$(SUBSPACE)
 
 path := lib$(subst ::,/,$(full_namespace))
-lib_path := lib$(subst ::,-,$(NAMESPACE))
-full_path := $(CWD)/$(lib_path)/$(path)
+lib_path := $(CWD)/lib$(subst ::,-,$(NAMESPACE))
+full_path := $(lib_path)/$(path)
 
-test_path := $(CWD)/$(lib_path)/tests/$(SUBSPACE)
-mock_path := $(CWD)/$(lib_path)/tests/mock/$(SUBSPACE)
+test_path := $(lib_path)/tests/$(SUBSPACE)
+mock_path := $(lib_path)/tests/mock/$(SUBSPACE)
 program_path := $(CWD)/$(NAME)
 
 class_name := $(NAME)

@@ -14,3 +14,9 @@ define check-namespace
 $(if $(NAMESPACE),,$\
 	$(error ERROR: Variable 'NAMESPACE' is empty!))
 endef
+
+#$(call check-project)
+define check-project
+$(if $(PROJECT),,$\
+	$(error ERROR: Variable 'PROJECT' is empty!))
+endef

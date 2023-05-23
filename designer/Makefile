@@ -9,6 +9,7 @@ export PLATFORM ?= ArmM7
 export AUTHOR ?= Adrian Szczepanski
 
 export NAME
+export PROJECT
 export NAMESPACE
 export SUBSPACE
 
@@ -26,6 +27,8 @@ interface-single-impl \
 mock-interface \
 mock-interface-single \
 program \
+lib-internal-software \
+lib-internal-software-no-tests \
 
 
 .PHONY: $(targets)

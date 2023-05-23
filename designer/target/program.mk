@@ -7,12 +7,7 @@ include Functions.mk
 include Configuration.mk
 
 $(call check-name)
-
-ifneq ($(NAMESPACE),)
-program_namespace := $(NAMESPACE)::$(NAME)
-else
-program_namespace := $(NAME)
-endif
+$(call check-project)
 
 define file_cpp
 #pragma once
@@ -23,7 +18,7 @@ define file_cpp
  * @date $(shell date +%Y-%m-%d)
  */
 
-using namespace $(program_namespace);
+using namespace $(PROJECT)::$(NAME);
 
 int main(int argc, char* argv[])
 {
@@ -33,7 +28,7 @@ int main(int argc, char* argv[])
 
 endef
 
-.PHONY: program $(full_program_name).cpp 
+.PHONY: program $(full_program_name).cpp $(full_program_makefile)
 
 program: $(full_program_name).cpp  $(full_program_makefile)
 

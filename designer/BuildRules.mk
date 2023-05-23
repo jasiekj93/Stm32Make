@@ -1,4 +1,4 @@
-# ------------------------------------------------
+ ------------------------------------------------
 # @author Adrian Szczepanski
 # @date 06-03-2023
 # ------------------------------------------------
@@ -29,8 +29,8 @@ $(full_program_name).cpp: | $(program_path)
 
 $(full_program_makefile) : | $(program_path)
 	@echo "Creating file $@"
-	cp $(template_path)/ProgramTmp.mk $@
-	$(SED) -i -e 's/@program_name@/$(NAME)/' $@
+	@cp $(template_path)/ProgramTmp.mk $@
+	@$(SED) -i -e 's/@program_name@/$(NAME)/' $@
 
 $(full_path) $(test_path) $(mock_path) $(program_path):
 	@echo "Creating directory $@"
