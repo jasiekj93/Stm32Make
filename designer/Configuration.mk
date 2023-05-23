@@ -9,7 +9,10 @@ SED ?= sed
 #paths and names
 template_path := ../template
 
-full_namespace := $(NAMESPACE)::$(SUBSPACE)
+full_namespace := $(NAMESPACE)
+ifneq ($(SUBSPACE),)
+full_namespace += ::$(SUBSPACE)
+endif
 
 path := lib$(subst ::,/,$(full_namespace))
 lib_path := $(CWD)/lib$(subst ::,-,$(NAMESPACE))
