@@ -10,10 +10,13 @@ project_dir ?= ..
 
 #include custom functions
 include $(make_dir)/Functions.mk
-$(call check-target)
+$(call check-library_name)
 
 # Append Configuration variables from file here
 include $(make_dir)/Configuration.mk
+
+# target
+target := lib$(project_name)-$(library_name)
 
 # Libraries
 LDLIBS := -lc -lm -lnosys \
