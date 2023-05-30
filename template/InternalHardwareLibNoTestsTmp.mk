@@ -5,7 +5,7 @@
 
 # Platform
 # Uncomment if program platform must be diffrent than the solution
-# override PLATFORM := Pc32
+# PLATFORM := Pc32
 
 # Target
 library_name := @library_name@
@@ -29,6 +29,22 @@ cxx_includes :=  \
 
 # Defines
 cxx_defs := \
+
+# internal libraries
+export required_libraries = \
+
+# external libraries
+#	e.g. if include flag is '-I$(external_dir)/libFoo'
+#	write 'libFoo'
+export external_library_include_path = \
+
+# 	for testing purposes
+export external_library_flags = \
+
+# 	for testing purposes 
+#	e.g. if link flag is '-L$(external_dir)/libFoo/lib'
+#	write 'libFoo/lib'
+export external_library_paths = \
 
 # Uncomment if gcc should be used for compilation *.c files
 # use_gcc_for_c_files := 1

@@ -10,8 +10,6 @@ $(call check-name)
 $(call check-project)
 
 define test_runner_cpp
-#pragma once
-
 /**
  * @file Runner.cpp
  * @author $(AUTHOR)

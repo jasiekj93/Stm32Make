@@ -42,9 +42,8 @@ define file_cpp
 using namespace $(full_namespace);
 
 $(class_name)::$(class_name)()
-	: instance(this)
 {
-
+	instance = this;
 }
 
 endef

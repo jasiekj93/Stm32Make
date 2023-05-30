@@ -18,9 +18,14 @@ path := lib$(subst ::,/,$(full_namespace))
 lib_path := $(CWD)/lib$(subst ::,-,$(NAMESPACE))
 full_path := $(lib_path)/$(path)
 
-test_path := $(lib_path)/tests/$(SUBSPACE)
-mock_path := $(lib_path)/tests/mock/$(SUBSPACE)
+test_path := $(lib_path)/tests
+mock_path := $(lib_path)/tests/mock
 program_path := $(CWD)/$(NAME)
+
+ifneq ($(SUBSPACE),)
+test_path += /$(SUBSPACE)
+mock_path += /$(SUBSPACE)
+endif
 
 class_name := $(NAME)
 full_name := $(full_path)/$(class_name)

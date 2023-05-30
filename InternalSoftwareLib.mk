@@ -38,10 +38,10 @@ all: library testLibrary tests
 library: $(lib_internal_dir)/$(target).a
 
 testLibrary: library
-	+@$(MAKE) -C . library PLATFORM=Pc32
+	+@$(MAKE) -C . library PLATFORM:=Pc32
 
 tests: testLibrary
-	+@$(MAKE) -C tests PLATFORM=Pc32
+	+@$(MAKE) -C tests PLATFORM:=Pc32
 
 print-%  : ; @echo "$* = $($*)"
 

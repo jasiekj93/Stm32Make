@@ -5,7 +5,7 @@
 
 # Platform
 # Uncomment if program platform must be diffrent than the solution
-# override PLATFORM := Pc32
+# PLATFORM := Pc32
 
 # Target
 library_name := @library_name@

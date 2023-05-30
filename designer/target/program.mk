@@ -10,8 +10,6 @@ $(call check-name)
 $(call check-project)
 
 define file_cpp
-#pragma once
-
 /**
  * @file Main.cpp
  * @author $(AUTHOR)
