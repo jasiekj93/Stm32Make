@@ -50,4 +50,4 @@ export external_library_paths = \
 # use_gcc_for_c_files := 1
 
 # Append rest of Makefile from template
-include $(make_dir)/HardwareLib.mk
+include $(make_dir)/InternalHardwareLib.mk

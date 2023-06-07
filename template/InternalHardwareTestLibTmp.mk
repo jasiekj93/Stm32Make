@@ -26,4 +26,4 @@ cxx_defs := \
 ldscript = 
 
 # Append rest of Makefile from template
-include $(make_dir)/HardwareTestLib.mk
+include $(make_dir)/InternalHardwareTestLib.mk
