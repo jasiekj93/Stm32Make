@@ -7,7 +7,7 @@
 export PLATFORM := ArmM7
 
 # project
-export project_name :=
+export project_name := @project_name@
 
 # Directories
 project_dir := .
@@ -18,6 +18,7 @@ export docs_dir := docs
 
 # External libraries
 external_names = \
+CppUTest \
 
 external_build_options = \
 
