@@ -64,7 +64,7 @@ rebuild:
 	+@$(MAKE) -C .
  
 documentation:
-ifneq ($(docs_dir),)
+ifneq ($(wildcard $(docs_dir)/.*),)
 	-+@$(MAKE) --directory=$(docs_dir)
 endif
 
@@ -78,7 +78,7 @@ install: release
 install uninstall: 
 	-+@for dir in $(program_dirs); do $(MAKE) --directory=$$dir $@ BUILD=release; done
 	-+@for dir in $(library_dirs); do $(MAKE) --directory=$$dir $@ BUILD=release; done
-ifneq ($(docs_dir),)
+ifneq ($(wildcard $(docs_dir)/.*),)
 	-+@$(MAKE) --directory=$(docs_dir) $@
 endif
 
@@ -93,7 +93,7 @@ mrproper: clean
 	-@$(RMDIR) $(bin_root_dir)
 	-@$(RMDIR) $(lib_root_dir)
 	-@$(RMDIR) $(test_root_dir)
-ifneq ($(docs_dir),)
+ifneq ($(wildcard ~/Dropbox/.*),)
 	-+@$(MAKE) --directory=$(docs_dir) clean 
 endif 
 
