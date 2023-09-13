@@ -46,3 +46,9 @@ define check-tested_library_name
 $(if $(tested_library_name),,$\
 	$(error ERROR: Variable 'tested_library_name' is empty!))
 endef
+
+#$(call check-ldscript)
+define check-ldscript
+$(if $(ldscript),,$\
+	$(error ERROR: Variable 'ldscript' is empty!))
+endef

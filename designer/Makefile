@@ -31,6 +31,7 @@ lib-internal-software-no-tests \
 lib-internal-hardware \
 lib-internal-hardware-no-tests \
 lib-software \
+lib-hardware \
 init-project \
 
 .PHONY: $(targets)

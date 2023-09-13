@@ -10,19 +10,15 @@ $(call check-name)
 $(call check-project)
 
 define test_runner_cpp
-#pragma once
-
 /**
  * @file Runner.cpp
  * @author $(AUTHOR)
  * @date $(shell date +%Y-%m-%d)
  */
 
-#include <CppUTest/CommandLineTestRunner.h>
-
 int main(int argc, char* argv[])
 {
-    return CommandLineTestRunner::RunAllTests(argc, argv);
+    return 0;
 }
 
 endef
@@ -35,19 +31,19 @@ make_file := $(main_dir)/Makefile
 test_make_file := $(test_dir)/Makefile
 test_runner := $(test_dir)/Runner.cpp
 
-.PHONY: lib-software $(make_file) $(test_make_file) $(test_runner)
+.PHONY: lib-hardware $(make_file) $(test_make_file) $(test_runner)
 
-lib-software: $(make_file) $(test_make_file) $(test_runner) | $(main_dir) $(source_dir) $(test_dir)
+lib-hardware: $(make_file) $(test_make_file) $(test_runner) | $(main_dir) $(source_dir) $(test_dir)
 
 $(make_file): | $(main_dir)
 	@echo "Creating file $@"
-	@cp $(template_path)/SoftwareLibTmp.mk $@
+	@cp $(template_path)/HardwareLibTmp.mk $@
 	@$(SED) -i -e 's/@library_name@/$(NAME)/' $@
 	@$(SED) -i -e 's#@library_sources@#lib$(NAME)#' $@
 
 $(test_make_file): | $(test_dir)
 	@echo "Creating file $@"
-	@cp $(template_path)/SoftwareTestLibTmp.mk $@
+	@cp $(template_path)/HardwareTestLibTmp.mk $@
 	@$(SED) -i -e 's/@library_name@/$(NAME)/' $@
 
 $(test_runner): | $(test_dir)
