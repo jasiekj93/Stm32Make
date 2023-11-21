@@ -30,7 +30,7 @@ endif
 class_name := $(NAME)
 full_name := $(full_path)/$(class_name)
 full_test_name := $(test_path)/$(class_name)
-full_mock_name := $(mock_path)/$(class_name)
+full_mock_name := $(mock_path)/$(class_name)Mock
 
 full_program_name := $(program_path)/Main
 full_program_makefile := $(program_path)/Makefile
