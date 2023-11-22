@@ -49,5 +49,9 @@ export external_library_paths = \
 # Uncomment if gcc should be used for compilation *.c files
 # use_gcc_for_c_files := 1
 
+# Uncomment if you want to add custom flags for gcc or g++
+# custom_c_flags :=
+# custom_cxx_flags :=
+
 # Append rest of Makefile from template
 include $(make_dir)/InternalHardwareLib.mk

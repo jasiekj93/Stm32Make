@@ -20,8 +20,8 @@ endif
 
 ### GCC flags ###
 CFLAGS = $(mcu) $(cxx_defs) $(cxx_includes) $(optimalization)
-CFLAGS += $(platform_c_flags)
-CXXFLAGS += $(platform_cxx_flags)
+CFLAGS += $(platform_c_flags) $(custom_c_flags)
+CXXFLAGS += $(platform_cxx_flags) $(custom_cxx_flags)
 
 # Add debug flags
 ifeq ($(generate_debug_info), 1)

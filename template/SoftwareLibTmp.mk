@@ -19,6 +19,10 @@ external_dir := $(project_dir)/external
 cxx_sources :=  \
 $(wildcard @library_sources@/*.cpp) \
 
+# c_sources := \
+
+# asm_sources := \
+
 # Includes
 cxx_includes := \
 -I. \
@@ -43,6 +47,13 @@ export external_library_paths = \
 installed_include_files = \
 
 installed_include_directories = \
+
+# Uncomment if gcc should be used for compilation *.c files
+# use_gcc_for_c_files := 1
+
+# Uncomment if you want to add custom flags for gcc or g++
+# custom_c_flags :=
+# custom_cxx_flags :=
 
 # Append rest of Makefile from template
 include $(make_dir)/SoftwareLib.mk
