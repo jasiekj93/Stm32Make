@@ -36,7 +36,9 @@ $(external_library_includes) \
 -I$(external_lib_dir)/CppUTest/include \
 
 # libraries
-library_flags := $(addprefix -l,$(required_libraries))
+# remove the 'lib' prefix from library name
+library_flags := $(patsubst lib%,%,$(required_libraries))
+library_flags := $(addprefix -l,$(library_flags))
 
 LDLIBS := \
 -lCppUTest \
