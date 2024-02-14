@@ -16,8 +16,8 @@ float-abi := -mfloat-abi=hard
 mcu := $(cpu) -mthumb $(fpu) $(float-abi) --sysroot=$(sysroot)
 
 # Compiler flags
-platform_c_flags := -feliminate-unused-debug-types 
-platform_cxx_flags := 
+platform_c_flags := -Wno-narrowing -feliminate-unused-debug-types 
+platform_cxx_flags := -Wno-psabi
 
 # Debug flags
 platform_debug_flags := -g -gstrict-dwarf 
