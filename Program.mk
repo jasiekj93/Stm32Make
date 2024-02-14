@@ -53,7 +53,7 @@ LDFLAGS += -T$(ldscript)
 endif
 
 # Targets
-.PHONY: all clean install uninstall $(required_libraries) $(required_internal_libraries) 
+.PHONY: all clean install uninstall deploy $(required_libraries) $(required_internal_libraries) 
 
 all: $(binaries)
 
@@ -99,3 +99,8 @@ ifeq ($(PLATFORM),Pc32)
 else
 	$(warning WARNING: Platform $(PLATFORM) is not supporting installation! Skipped for $<.)
 endif
+
+deploy: $(bin_dir)/$(target).elf
+	$(call check-REMOTE)
+	@echo Deploying $(notdir $<) at $(REMOTE):$(DESTDIR)$(PREFIX)/bin/
+	@scp $< $(REMOTE):$(DESTDIR)$(PREFIX)/bin/$(notdir $(basename $<))

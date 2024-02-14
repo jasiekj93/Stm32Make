@@ -9,6 +9,9 @@ export PLATFORM := ArmM7
 # project
 export project_name := @project_name@
 
+# sysroot (for cross-compilation)
+# export sysroot := 
+
 # Directories
 project_dir := .
 make_dir := $(project_dir)/make

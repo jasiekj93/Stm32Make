@@ -16,17 +16,17 @@ float-abi := -mfloat-abi=hard
 mcu := $(cpu) -mthumb $(fpu) $(float-abi) --sysroot=$(sysroot)
 
 # Compiler flags
-platform_c_flags := -feliminate-unused-debug-types
+platform_c_flags := -feliminate-unused-debug-types 
 platform_cxx_flags := 
 
 # Debug flags
 platform_debug_flags := -g -gstrict-dwarf 
 
 # Linker flags
-platform_linker_flags := -feliminate-unused-debug-types
+platform_linker_flags := -feliminate-unused-debug-types 
 
 # Libraries
-platform_libraries := -lc -lm -lnosys 
+platform_libraries := 
 
 # Binary extensions
-platform_binary_extensions := elf hex bin
+platform_binary_extensions := elf 

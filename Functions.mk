@@ -52,3 +52,9 @@ define check-ldscript
 $(if $(ldscript),,$\
 	$(error ERROR: Variable 'ldscript' is empty!))
 endef
+
+#$(call check-REMOTE)
+define check-REMOTE
+$(if $(REMOTE),,$\
+	$(error ERROR: Variable 'REMOTE' is empty!))
+endef

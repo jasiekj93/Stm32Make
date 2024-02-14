@@ -28,7 +28,7 @@ $(external_library_includes) \
 include $(make_dir)/Flags.mk
 
 # Targets
-.PHONY: all library testLibrary tests clean install uninstall
+.PHONY: all library testLibrary tests clean install uninstall deploy
 
 all: library testLibrary tests
 
@@ -83,3 +83,12 @@ ifeq ($(PLATFORM),Pc32)
 else
 	$(warning WARNING: Platform $(PLATFORM) is not supporting installation! Skipped for $<.)
 endif
+
+deploy: $(lib_dir)/$(target).a
+	$(call check-REMOTE)
+	@echo Deploying $(notdir $<) at $(REMOTE):$(DESTDIR)$(PREFIX)/lib/
+	@scp $< $(REMOTE):$(DESTDIR)$(PREFIX)/lib/$(notdir $<)
+	@scp $(installed_include_files) $(REMOTE):$(DESTDIR)$(PREFIX)/include/
+	@for dir in $(installed_include_directories); do \
+		scp $$dir/*.hpp $(REMOTE):$(DESTDIR)$(PREFIX)/include/$$dir; \
+	done

@@ -35,7 +35,7 @@ include $(make_dir)/Flags.mk
 
 # targets
 .PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) \
-rebuild clean mrproper distclean documentation install uninstall
+rebuild clean mrproper distclean documentation install uninstall deploy
 
 debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 	@echo "Building time: [$(build_time) seconds]"
@@ -73,9 +73,9 @@ ifeq ($(PREFIX),)
     PREFIX := /usr/local
 endif 
 
-install: release
+install deploy: release
 
-install uninstall: 
+install uninstall deploy: 
 	-+@for dir in $(program_dirs); do $(MAKE) --directory=$$dir $@ BUILD=release; done
 	-+@for dir in $(library_dirs); do $(MAKE) --directory=$$dir $@ BUILD=release; done
 ifneq ($(wildcard $(docs_dir)/.*),)
