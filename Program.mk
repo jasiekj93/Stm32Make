@@ -101,6 +101,10 @@ else
 endif
 
 deploy: $(bin_dir)/$(target).elf
+ifneq ($(PLATFORM),Pc32)
 	$(call check-REMOTE)
 	@echo Deploying $(notdir $<) at $(REMOTE):$(DESTDIR)$(PREFIX)/bin/
 	@scp $< $(REMOTE):$(DESTDIR)$(PREFIX)/bin/$(notdir $(basename $<))
+else
+	$(warning WARNING: Platform $(PLATFORM) is not supporting deploying! Skipped for $<.)
+endif

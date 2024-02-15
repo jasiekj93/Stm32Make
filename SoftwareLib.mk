@@ -85,6 +85,7 @@ else
 endif
 
 deploy: $(lib_dir)/$(target).a
+ifneq ($(PLATFORM),Pc32)
 	$(call check-REMOTE)
 	@echo Deploying $(notdir $<) at $(REMOTE):$(DESTDIR)$(PREFIX)/lib/
 	@scp $< $(REMOTE):$(DESTDIR)$(PREFIX)/lib/$(notdir $<)
@@ -92,3 +93,6 @@ deploy: $(lib_dir)/$(target).a
 	@for dir in $(installed_include_directories); do \
 		scp $$dir/*.hpp $(REMOTE):$(DESTDIR)$(PREFIX)/include/$$dir; \
 	done
+else
+	$(warning WARNING: Platform $(PLATFORM) is not supporting deploying! Skipped for $<.)
+endif

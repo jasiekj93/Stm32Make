@@ -17,22 +17,9 @@ export SUBSPACE
 make_repository := https://github.com/jasiekj93/Stm32Make
 
 # targets
-targets := \
-class \
-interface \
-interface-impl \
-interface-single \
-interface-single-impl \
-mock-interface \
-mock-interface-single \
-program \
-lib-internal-software \
-lib-internal-software-no-tests \
-lib-internal-hardware \
-lib-internal-hardware-no-tests \
-lib-software \
-lib-hardware \
-init-project \
+targets := $(notdir $\
+	$(basename $\
+		$(wildcard target/*.mk)))
 
 .PHONY: $(targets)
 

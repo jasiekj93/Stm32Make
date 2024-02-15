@@ -6,14 +6,17 @@
 # This file is only a template and should be included 
 # in other Makefile
 
-# Append Configuration variables from file here
-include $(make_dir)/Configuration.mk
+#include main makefile targets(goals) for project
+include $(make_dir)/MainGoals.mk
 
 #include custom functions
 include $(make_dir)/Functions.mk
 $(call check-platform)
 $(call check-build)
 $(call check-project_name)
+
+# Append GCC flags variables from file here
+include $(make_dir)/Flags.mk
 
 # Measuring time feature
 # start_time variable is expanded immiediate at the beggining of make process,
@@ -23,20 +26,7 @@ start_time := $(shell date +%s)
 end_time = $(shell date +%s)
 build_time = $(shell expr $(end_time) - $(start_time) )
 
-project_dir := .
-
-internal_library_dirs := $(addprefix lib$(project_name)-, $(internal_library_names))
-program_dirs := $(program_names)
-library_dirs := $(library_names)
-external_dirs := $(addprefix $(external_lib_dir)/, $(external_names))
-
-# Append GCC flags variables from file here
-include $(make_dir)/Flags.mk
-
 # targets
-.PHONY: debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) \
-rebuild clean mrproper distclean documentation install uninstall deploy
-
 debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 	@echo "Building time: [$(build_time) seconds]"
 

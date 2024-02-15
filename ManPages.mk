@@ -31,7 +31,7 @@ vpath %.1 $(sort $(dir $(programs)))
 vpath %.3 $(sort $(dir $(libraries)))
 
 #targets
-.PHONY: all clean text html pdf install uninstall
+.PHONY: all clean text html pdf install uninstall deploy
 
 all: text html pdf
 text: $(text_targets)
@@ -95,3 +95,6 @@ $(DESTDIR)$(PREFIX)/share/man/man3/%.3: %.3 Makefile
 uninstall:
 	@echo Uninstalling man pages
 	-@$(RM) $(installed_programs) $(installed_libraries)
+
+deploy:
+#TODO
