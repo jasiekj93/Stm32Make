@@ -28,7 +28,7 @@ init-solution: $(make_file) $(project_file) $(git_ignore) | $(external_dir)
 
 $(make_file): 
 	@echo "Creating file $@"
-	@cp $(template_path)/Solution.mk $@
+	@cp $(template_path)/SolutionTmp.mk $@
 
 $(project_file): 
 	@echo "Creating file $@"
