@@ -58,3 +58,33 @@ define check-REMOTE
 $(if $(REMOTE),,$\
 	$(error ERROR: Variable 'REMOTE' is empty!))
 endef
+
+#$(call check-linux_root)
+define check-linux_root
+$(if $(linux_root),,$\
+	$(error ERROR: Variable 'linux_root' is empty!))
+endef
+
+#$(call check-sdk_enviroment)
+define check-sdk_enviroment
+$(if $(sdk_enviroment),,$\
+	$(error ERROR: Variable 'sdk_enviroment' is empty!))
+endef
+
+#$(call check-kernel_version)
+define check-kernel_version
+$(if $(kernel_version),,$\
+	$(error ERROR: Variable 'kernel_version' is empty!))
+endef
+
+#$(call check-hostname)
+define check-hostname
+$(if $(hostname),,$\
+	$(error ERROR: Variable 'hostname' is empty!))
+endef
+
+#$(call check-destination_device_tree_name)
+define check-destination_device_tree_name
+$(if $(destination_device_tree_name),,$\
+	$(error ERROR: Variable 'destination_device_tree_name' is empty!))
+endef
