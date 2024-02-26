@@ -32,7 +32,8 @@ device_tree_target := $(patsubst %.dts,%.dtb,$(notdir $(device_tree_source)))
 device_tree_artifact := $(artifact_boot_dir)/$(device_tree_target)
 
 # targets
-.PHONY: init menuconfig build-kernel build-modules build-dtb deploy-kernel deploy-modules deploy-all deploy-dtb clean mrproper distclean
+.PHONY: init menuconfig build-kernel build-modules build-dtb build-all \
+	deploy-kernel deploy-modules deploy-all deploy-dtb clean mrproper distclean
 
 init: $(config_file)
 
@@ -40,13 +41,15 @@ menuconfig: $(config_file)
 	+@source $(sdk_enviroment) && \
 		$(MAKE) -C $(build_dir) ARCH=arm menuconfig
 
+build-all: build-kernel build-modules build-dtb
+
 build-kernel: $(uImage_file)
 
 build-modules: $(modules_symbols_file)
 
 build-dtb: $(device_tree_artifact) 
 
-deploy-all: deploy-kernel deploy-modules
+deploy-all: deploy-kernel deploy-modules deploy-dtb
 
 deploy-kernel: $(uImage_file) 
 	$(call check-hostname)
@@ -91,7 +94,7 @@ $(config_file): Makefile | $(build_dir) $(source_dir)
 $(uImage_file): $(config_file) Makefile | $(artifact_boot_dir) 
 	@echo Building kernel
 	+@source $(sdk_enviroment) && \
-		$(MAKE) -C $(source_dir) ARCH=arm uImage vmlinux dtbs $(device_tree_target) LOADADDR=0xC2000040 O="$(build_dir)"
+		$(MAKE) -C $(source_dir) ARCH=arm uImage vmlinux dtbs LOADADDR=0xC2000040 O="$(build_dir)"
 	@echo Copying kernel artifacts to $(artifact_boot_dir)
 	@cp $(build_dir)/arch/arm/boot/uImage $(artifact_boot_dir)/
 	@cp $(build_dir)/arch/arm/boot/dts/st*.dtb $(artifact_boot_dir)/
