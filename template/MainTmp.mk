@@ -34,6 +34,10 @@ program_names = \
 # Project libraries
 library_names = \
 
+# optimalization flags
+# export debug_optimalization := 
+# export release_optimalization := 
+
 # Append rest of Makefile from template
 include $(make_dir)/Main.mk
 

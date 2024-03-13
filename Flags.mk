@@ -6,19 +6,23 @@
 # This file is only a template and should be included 
 # in other Makefile
 
+# Optimalization flags
+debug_optimalization ?= -O0
+release_optimalization ?= -O2
+
 # Release
-generate_lst_files = 0
-generate_debug_info = 0
-optimalization = -O0
+generate_lst_files := 0
+generate_debug_info := 0
+optimalization := $(release_optimalization) 
 
 # Debug
 ifeq ($(BUILD), debug)
-generate_lst_files = 1
-generate_debug_info = 1
-optimalization = -O0
+generate_lst_files := 1
+generate_debug_info := 1
+optimalization = $(debug_optimalization)
 endif
 
-### GCC flags ###
+# GCC and G++ flags
 CFLAGS = $(mcu) $(cxx_defs) $(cxx_includes) $(optimalization)
 CFLAGS += $(platform_c_flags) $(custom_c_flags)
 CXXFLAGS += $(platform_cxx_flags) $(custom_cxx_flags)
