@@ -30,4 +30,9 @@ endef
 
 program: $(full_program_name).cpp  $(full_program_makefile)
 
+$(full_program_makefile) : | $(program_path)
+	@echo "Creating file $@"
+	@cp $(template_path)/ProgramTmp.mk $@
+	@$(SED) -i -e 's/@program_name@/$(NAME)/' $@
+
 include BuildRules.mk

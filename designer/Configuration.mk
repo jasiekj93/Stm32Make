@@ -21,6 +21,7 @@ full_path := $(lib_path)/$(path)
 test_path := $(lib_path)/tests
 mock_path := $(lib_path)/tests/mock
 program_path := $(CWD)/$(NAME)
+gtk_program_resource_path := $(program_path)/resource
 
 ifneq ($(SUBSPACE),)
 test_path += /$(SUBSPACE)
