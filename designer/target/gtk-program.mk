@@ -32,6 +32,8 @@ define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource>
+	<!--<file preprocess="xml-stripblanks">resource/MyWindow.glade</file>
+    <file>resource/gtk-logo.png</file>-->
   </gresource>
 </gresources>
 endef
