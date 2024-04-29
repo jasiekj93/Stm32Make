@@ -18,6 +18,7 @@ resource_dir := resource
 
 # Resources
 gio_resource_file := $(resource_dir)/gresource.xml
+resource_files := \
 
 # Sources 
 cxx_sources :=  \

@@ -27,10 +27,10 @@ LDLIBS += $(shell pkg-config --libs gtkmm-3.0)
 # Generating Gio c/h files build rules
 $(objects): $(gio_header) $(gio_source)
 
-$(gio_source): $(gio_resource_file) $(gio_header) Makefile
+$(gio_source): $(gio_resource_file) $(gio_header) $(resource_files) Makefile
 	@echo Generating $@
 	@glib-compile-resources --target=$@ --generate-source $<
 
-$(gio_header): $(gio_resource_file) Makefile 
+$(gio_header): $(gio_resource_file) $(resource_files) Makefile 
 	@echo Generating $@
 	@glib-compile-resources --target=$@ --generate-header $<
