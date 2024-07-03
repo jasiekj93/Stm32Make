@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 # Target
-tested_library_name := @library_name@ 
+tested_library_name := @library_name@
 
 # Directories
 project_dir ?= ../..

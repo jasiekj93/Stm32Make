@@ -27,7 +27,7 @@ $(addprefix -L$(external_dir)/,$(external_library_paths))
 required_libraries := $(tested_library_name)
 
 # Includes
-library_includes := $(addprefix -I$(project_dir)/,$(required_libraries))
+library_includes := $(addprefix -I$(project_dir)/lib,$(required_libraries))
 external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
 
 cxx_includes += \

@@ -39,7 +39,7 @@ lib-software: $(make_file) $(test_make_file) $(test_runner) | $(main_dir) $(sour
 
 $(make_file): | $(main_dir)
 	@echo "Creating file $@"
-	@cp $(template_path)/SoftwareLibTmp.mk $@
+	@cp $(template_path)/SoftwareSharedLibTmp.mk $@
 	@$(SED) -i -e 's/@library_name@/$(NAME)/' $@
 	@$(SED) -i -e 's#@library_sources@#lib$(NAME)#' $@
 

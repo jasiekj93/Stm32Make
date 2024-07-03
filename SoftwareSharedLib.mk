@@ -1,6 +1,6 @@
 # ------------------------------------------------
 # @author Adrian Szczepanski
-# @date 06-03-2022
+# @date 02-07-2024
 # ------------------------------------------------
 
 # This file is only a template and should be included 
@@ -27,12 +27,15 @@ $(external_library_includes) \
 # Append GCC flags variables from file here
 include $(make_dir)/Flags.mk
 
+# Append position independent flag 
+CFLAGS += -fPIC 
+
 # Targets
 .PHONY: all library testLibrary tests clean install uninstall deploy
 
 all: library testLibrary tests
 
-library: $(lib_dir)/$(target).a
+library: $(lib_dir)/$(target).so
 
 testLibrary: 
 	+@$(MAKE) -C . library PLATFORM=Pc32
@@ -55,11 +58,11 @@ ifeq ($(PREFIX),)
    PREFIX := /usr/local
 endif 
 
-install: $(lib_dir)/$(target).a
+install: $(lib_dir)/$(target).so
 ifeq ($(PLATFORM),Pc32)
 	@echo Installing $<
 	@install -d $(DESTDIR)$(PREFIX)/lib/
-	@install -m 644 $(lib_dir)/$(target).a $(DESTDIR)$(PREFIX)/lib/
+	@install -m 644 $(lib_dir)/$(target).so $(DESTDIR)$(PREFIX)/lib/
 	@install -d $(DESTDIR)$(PREFIX)/include/
 ifneq ($(installed_include_files),)
 	@install -m 644 $(installed_include_files) $(DESTDIR)$(PREFIX)/include/
@@ -74,8 +77,8 @@ endif
 
 uninstall:
 ifeq ($(PLATFORM),Pc32)
-	@echo Uninstalling $(target).a
-	-@$(RM) $(DESTDIR)$(PREFIX)/lib/$(target).a
+	@echo Uninstalling $(target).so
+	-@$(RM) $(DESTDIR)$(PREFIX)/lib/$(target).so
 	-@for dir in $(installed_include_directories); do \
 		$(RMDIR) $(DESTDIR)$(PREFIX)/include/$$dir; \
 	done
@@ -86,7 +89,7 @@ else
 	$(warning WARNING: Platform $(PLATFORM) is not supporting installation! Skipped for $<.)
 endif
 
-deploy: $(lib_dir)/$(target).a
+deploy: $(lib_dir)/$(target).so
 ifneq ($(PLATFORM),Pc32)
 	$(call check-REMOTE)
 	@echo Deploying $(notdir $<) at $(REMOTE):$(DESTDIR)$(PREFIX)/lib/

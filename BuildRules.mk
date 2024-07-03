@@ -40,6 +40,11 @@ $(lib_dir)/$(target).a: $(objects) Makefile | $(lib_dir)
 	@echo Creating library $@
 	@$(AR) rcs $@ $(objects) 
 
+# build shared library
+$(lib_dir)/$(target).so: $(objects) Makefile | $(lib_dir)
+	@echo Creating shared library $@
+	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -shared -o $@
+
 # build internal library
 $(lib_internal_dir)/$(target).a: $(objects) Makefile | $(lib_internal_dir)
 	@echo Creating library $@
