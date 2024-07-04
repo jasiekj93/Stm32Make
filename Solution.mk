@@ -17,6 +17,12 @@ sol_start_time := $(shell date +%s)
 sol_end_time = $(shell date +%s)
 sol_build_time = $(shell expr $(sol_end_time) - $(sol_start_time) )
 
+# change destination platform if is specified in command line or passed from
+# overriding project
+ifneq ($(PLATFORM),)
+PLATFORMS := $(PLATFORM)
+endif
+
 # pass every target(goal) to the project makefile for every platform
 # if platform has defined sysroot, separate it to different variables
 $(make_goals):
@@ -24,3 +30,5 @@ $(make_goals):
 		echo "Executing '$@' target for platform $(firstword $(subst =, sysroot=,$(platform)))";\
 		$(MAKE) -f Project.mk PLATFORM=$(subst =, sysroot=,$(platform)) $@;)
 	@echo "Solution building time: [$(sol_build_time) seconds]"
+
+print-%  : ; @echo "$* = $($*)"
