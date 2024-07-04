@@ -5,7 +5,9 @@
 
 # This file is only a template and should be included 
 # in other Makefile
-PLATFORM ?= ArmM7
+include $(make_dir)/Functions.mk
+$(call check-platform)
+
 BUILD ?= debug
 
 # directories

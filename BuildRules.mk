@@ -67,7 +67,7 @@ $(test_dir)/%.bin: $(test_dir)/%.elf | $(test_dir)
 # build main executable: elf
 $(bin_dir)/$(target).elf: $(objects) Makefile | $(bin_dir)
 	@echo Linking $@
-	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -o $@
+	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -o $@ -pthread
 	@$(SZ) $@
 
 # build main executable: hex

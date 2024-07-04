@@ -6,6 +6,14 @@
 # This file is only a template and should be included 
 # in other Makefile
 
+# change destination platform if is specified in command line or passed from
+# overriding project
+ifneq ($(PLATFORM),)
+PLATFORMS := $(PLATFORM)
+else
+PLATFORM := $(firstword $(PLATFORMS))
+endif
+
 # Append main make targets(goals) from file here
 include $(make_dir)/MainGoals.mk 
 
@@ -16,12 +24,6 @@ include $(make_dir)/MainGoals.mk
 sol_start_time := $(shell date +%s)
 sol_end_time = $(shell date +%s)
 sol_build_time = $(shell expr $(sol_end_time) - $(sol_start_time) )
-
-# change destination platform if is specified in command line or passed from
-# overriding project
-ifneq ($(PLATFORM),)
-PLATFORMS := $(PLATFORM)
-endif
 
 # pass every target(goal) to the project makefile for every platform
 # if platform has defined sysroot, separate it to different variables

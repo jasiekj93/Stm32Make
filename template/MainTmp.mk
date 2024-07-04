@@ -4,7 +4,7 @@
 # ------------------------------------------------
 
 # platform
-export PLATFORM := ArmM7
+export PLATFORM := 
 
 # project
 export project_name := @project_name@
