@@ -53,7 +53,7 @@ $(lib_internal_dir)/$(target).a: $(objects) Makefile | $(lib_internal_dir)
 # build test executable: elf
 $(test_dir)/$(target).elf: $(objects) Makefile | $(test_dir)
 	@echo Linking $@
-	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -o $@
+	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -o $@ ${terminating_libs}
 	@$(SZ) $@
 
 # build test executable (hardware): hex
@@ -67,7 +67,7 @@ $(test_dir)/%.bin: $(test_dir)/%.elf | $(test_dir)
 # build main executable: elf
 $(bin_dir)/$(target).elf: $(objects) Makefile | $(bin_dir)
 	@echo Linking $@
-	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -o $@ -pthread
+	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -o $@ ${terminating_libs}
 	@$(SZ) $@
 
 # build main executable: hex
