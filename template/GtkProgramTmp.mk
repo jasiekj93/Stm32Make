@@ -35,6 +35,9 @@ cxx_includes := \
 # Defines
 cxx_defs := \
 
+# Additional objects
+# additional_objects := \
+
 # internal libraries
 required_internal_libraries = \
 

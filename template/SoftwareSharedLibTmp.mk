@@ -30,6 +30,9 @@ cxx_includes := \
 # Defines
 cxx_defs := \
 
+# Additional objects
+# additional_objects := \
+
 # external libraries
 #	e.g. if include flag is '-I$(external_dir)/libFoo'
 #	write 'libFoo'

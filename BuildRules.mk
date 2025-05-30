@@ -38,22 +38,22 @@ $(build_dir)/%.o: %.s Makefile | $(build_dir)
 # build library
 $(lib_dir)/$(target).a: $(objects) Makefile | $(lib_dir)
 	@echo Creating library $@
-	@$(AR) rcs $@ $(objects) 
+	@$(AR) rcs $@ $(objects) $(additional_objects)
 
 # build shared library
 $(lib_dir)/$(target).so: $(objects) Makefile | $(lib_dir)
 	@echo Creating shared library $@
-	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -shared -o $@
+	@$(CXX) $(objects) $(additional_objects) $(LDFLAGS) $(LDLIBS) -shared -o $@
 
 # build internal library
 $(lib_internal_dir)/$(target).a: $(objects) Makefile | $(lib_internal_dir)
 	@echo Creating library $@
-	@$(AR) rcs $@ $(objects) 
+	@$(AR) rcs $@ $(objects) $(additional_objects)
 
 # build test executable: elf
 $(test_dir)/$(target).elf: $(objects) Makefile | $(test_dir)
 	@echo Linking $@
-	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -o $@ ${terminating_libs}
+	@$(CXX) $(objects) $(additional_objects) $(LDFLAGS) $(LDLIBS) -o $@ ${terminating_libs}
 	@$(SZ) $@
 
 # build test executable (hardware): hex
@@ -67,7 +67,7 @@ $(test_dir)/%.bin: $(test_dir)/%.elf | $(test_dir)
 # build main executable: elf
 $(bin_dir)/$(target).elf: $(objects) Makefile | $(bin_dir)
 	@echo Linking $@
-	@$(CXX) $(objects) $(LDFLAGS) $(LDLIBS) -o $@ ${terminating_libs}
+	@$(CXX) $(objects) $(additional_objects) $(LDFLAGS) $(LDLIBS) -o $@ ${terminating_libs}
 	@$(SZ) $@
 
 # build main executable: hex
