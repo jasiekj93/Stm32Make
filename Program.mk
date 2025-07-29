@@ -19,6 +19,11 @@ include $(make_dir)/Configuration.mk
 # binaries
 binaries := $(addprefix $(bin_dir)/$(target)., $(platform_binary_extensions))
 
+ifneq ($(filter $(PLATFORM),$(supported_platforms)), $(PLATFORM))
+$(info "Platform $(PLATFORM) not supported - skipping build of $(target)")
+binaries = 
+endif
+
 # libraries
 LDFLAGS := \
 $(addprefix -L$(external_dir)/,$(external_library_paths))

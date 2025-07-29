@@ -16,7 +16,12 @@ $(call check-library_name)
 include $(make_dir)/Configuration.mk
 
 # target
-target := lib$(library_name)
+target := $(lib_dir)/lib$(library_name).a
+
+ifneq ($(filter $(PLATFORM),$(supported_platforms)), $(PLATFORM))
+$(info "Platform $(PLATFORM) not supported - skipping build of $(library_name)")
+target = 
+endif
 
 # Includes
 external_library_includes := $(addprefix -I$(external_dir)/,$(external_library_include_path))
@@ -32,7 +37,7 @@ include $(make_dir)/Flags.mk
 
 all: library tests
 
-library: $(lib_dir)/$(target).a
+library: $(target)
 
 tests: library
 	+@$(MAKE) -C tests 
@@ -47,7 +52,7 @@ clean:
 	@echo Cleaning
 	-@$(RMDIR) $(build_dir)
 
-install: $(lib_dir)/$(target).a
+install: $(target)
 	$(warning WARNING: Platform $(PLATFORM) is not supporting installation! Skipped for $<.)
 
 uninstall:

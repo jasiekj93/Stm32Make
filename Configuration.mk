@@ -39,3 +39,6 @@ BIN := $(CP) -O binary -S
 # Utilities
 RMDIR ?= rm -rf
 MKDIR ?= mkdir -p
+
+# Supported platforms
+supported_platforms ?= $(supported_make_platforms)

@@ -17,7 +17,12 @@ $(call check-project_name)
 include $(make_dir)/Configuration.mk
 
 # target
-target := lib$(project_name)-$(library_name)
+target := $(lib_internal_dir)/lib$(project_name)-$(library_name).a
+
+ifneq ($(filter $(PLATFORM),$(supported_platforms)), $(PLATFORM))
+$(info "Platform $(PLATFORM) not supported - skipping build of lib$(project_name)-$(library_name)")
+target = 
+endif
 
 # Includes
 library_includes := $(addprefix -I$(project_dir)/lib$(project_name)-,$(required_libraries))
@@ -35,7 +40,7 @@ include $(make_dir)/Flags.mk
 
 all: library 
 
-library: $(lib_internal_dir)/$(target).a
+library: $(target)
 
 print-%  : ; @echo "$* = $($*)"
 

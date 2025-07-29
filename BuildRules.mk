@@ -18,12 +18,12 @@ vpath %.s $(sort $(dir $(asm_sources)))
 
 # build C++ objects
 $(build_dir)/%.o: %.cpp Makefile | $(build_dir)
-	@echo Compiling $<
+	@echo "Compiling $< ($(PLATFORM))"
 	@$(CXX) -c $(CXXFLAGS) $< -o $@
 
 # build C objects
 $(build_dir)/%.o: %.c Makefile | $(build_dir)
-	@echo Compiling $<
+	@echo "Compiling $< ($(PLATFORM))"
 ifeq ($(use_gcc_for_c_files), 1)
 	@$(CC) -c $(CFLAGS) $< -o $@
 else
@@ -32,27 +32,27 @@ endif
 
 # build ASM objects
 $(build_dir)/%.o: %.s Makefile | $(build_dir)
-	@echo Compiling $<
+	@echo "Compiling $< ($(PLATFORM))"
 	@$(AS) -c $(ASFLAGS) $< -o $@
 
 # build library
 $(lib_dir)/$(target).a: $(objects) Makefile | $(lib_dir)
-	@echo Creating library $@
+	@echo "Creating library $@ ($(PLATFORM))"
 	@$(AR) rcs $@ $(objects) $(additional_objects)
 
 # build shared library
 $(lib_dir)/$(target).so: $(objects) Makefile | $(lib_dir)
-	@echo Creating shared library $@
+	@echo "Creating shared library $@ ($(PLATFORM))"
 	@$(CXX) $(objects) $(additional_objects) $(LDFLAGS) $(LDLIBS) -shared -o $@
 
 # build internal library
 $(lib_internal_dir)/$(target).a: $(objects) Makefile | $(lib_internal_dir)
-	@echo Creating library $@
+	@echo "Creating library $@ ($(PLATFORM))"
 	@$(AR) rcs $@ $(objects) $(additional_objects)
 
 # build test executable: elf
 $(test_dir)/$(target).elf: $(objects) Makefile | $(test_dir)
-	@echo Linking $@
+	@echo "Linking $@ ($(PLATFORM))"
 	@$(CXX) $(objects) $(additional_objects) $(LDFLAGS) $(LDLIBS) -o $@ ${terminating_libs}
 	@$(SZ) $@
 
@@ -66,7 +66,7 @@ $(test_dir)/%.bin: $(test_dir)/%.elf | $(test_dir)
 
 # build main executable: elf
 $(bin_dir)/$(target).elf: $(objects) Makefile | $(bin_dir)
-	@echo Linking $@
+	@echo "Linking $< ($(PLATFORM))"
 	@$(CXX) $(objects) $(additional_objects) $(LDFLAGS) $(LDLIBS) -o $@ ${terminating_libs}
 	@$(SZ) $@
 
