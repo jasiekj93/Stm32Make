@@ -16,7 +16,7 @@ $(call check-library_name)
 include $(make_dir)/Configuration.mk
 
 # target
-target := $(lib_dir)/lib$(library_name).a
+target := lib$(library_name)
 
 ifneq ($(filter $(PLATFORM),$(supported_platforms)), $(PLATFORM))
 $(info "Platform $(PLATFORM) not supported - skipping build of $(library_name)")
@@ -37,7 +37,7 @@ include $(make_dir)/Flags.mk
 
 all: library tests
 
-library: $(target)
+library: $(lib_dir)/$(target).a
 
 tests: library
 	+@$(MAKE) -C tests 

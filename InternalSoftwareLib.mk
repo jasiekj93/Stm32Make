@@ -17,7 +17,7 @@ $(call check-project_name)
 include $(make_dir)/Configuration.mk
 
 # target
-target := $(lib_internal_dir)/lib$(project_name)-$(library_name).a
+target := lib$(project_name)-$(library_name)
 
 ifneq ($(filter $(PLATFORM),$(supported_platforms)), $(PLATFORM))
 $(info "Platform $(PLATFORM) not supported - skipping build of lib$(project_name)-$(library_name)")
@@ -40,9 +40,9 @@ include $(make_dir)/Flags.mk
 
 all: library testLibrary tests
 
-library: $(target)
+library: $(lib_internal_dir)/$(target).a
 
-testLibrary: $(target)
+testLibrary: $(lib_internal_dir)/$(target).a
 	+@$(MAKE) -C . library PLATFORM:=Pc32
 
 tests: testLibrary
