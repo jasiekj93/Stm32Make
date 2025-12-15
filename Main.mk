@@ -33,6 +33,11 @@ debug: $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs)
 release: documentation
 	+@$(MAKE) --directory=$(project_dir) BUILD=release
 
+libraries: $(library_dirs)
+	@echo "Building time: [$(build_time) seconds]"
+
+programs: $(program_dirs)
+	@echo "Building time: [$(build_time) seconds]"
 
 $(program_dirs): $(library_dirs) $(external_dirs) $(internal_library_dirs)
 

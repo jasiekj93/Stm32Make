@@ -17,7 +17,7 @@ library_dirs := $(library_names)
 external_dirs := $(addprefix $(external_lib_dir)/, $(external_names))
 
 # targets
-make_goals := debug release $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) \
+make_goals := debug release libraries programs $(external_dirs) $(internal_library_dirs) $(program_dirs) $(library_dirs) \
 rebuild clean mrproper distclean documentation install uninstall deploy
 
 .PHONY: $(make_goals)
