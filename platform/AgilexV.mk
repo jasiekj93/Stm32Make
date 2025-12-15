@@ -29,4 +29,4 @@ platform_linker_flags := -Wl,--hash-style=gnu -Wl,--as-needed -fstack-protector-
 platform_libraries := 
 
 # Binary extensions
-platform_binary_extensions := elf hex bin
+platform_binary_extensions := elf
