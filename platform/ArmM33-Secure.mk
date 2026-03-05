@@ -10,7 +10,7 @@
 # that will be created during compilation of the Secure program.
 # This file is used by Non-secure program and must be added in $(additional_objects) variable in Non-Secure Makefile.
 $(if $(cmse-nsc-outfile-o),,$\
-	$(error ERROR: Variable 'cmse-nsc-outfile-o' is empty!))
+	$(warning WARNING: Variable 'cmse-nsc-outfile-o' is empty!))
 
 # Toolchain
 toolchain_prefix := arm-none-eabi-
