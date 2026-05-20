@@ -48,5 +48,11 @@ ASFLAGS += $(mcu) $(asm_defs) $(asm_includes) $(optimalization) -Wall -fdata-sec
 
 # Linker flags and directories
 # Libraries are stored in variable LDLIBS
-LDFLAGS += $(mcu) -L$(lib_dir) -L$(lib_internal_dir) -Wl,-Map=$(build_dir)/$(target).map,--cref -Wl,--gc-sections
+LDFLAGS += $(mcu) -L$(lib_dir) -L$(lib_internal_dir) -Wl,-Map=$(build_dir)/$(target).map,--cref
+ifeq ($(BUILD), debug)
+# --gc-sections corrupts DWARF .debug_line relocations for library code (GC'd functions
+# from the same CU leave DW_LNE_set_address at 0x0, breaking source-level debugging)
+else
+LDFLAGS += -Wl,--gc-sections
+endif
 LDFLAGS += $(platform_linker_flags)
