@@ -32,6 +32,11 @@ ifeq ($(generate_debug_info), 1)
 CFLAGS += $(platform_debug_flags)
 endif
 
+# disable debug
+ifeq ($(BUILD), release)
+CFLAGS += -DNDEBUG
+endif
+
 # Generate dependency information as 'make' rules
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)" 
 
